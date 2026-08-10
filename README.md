@@ -1,13 +1,13 @@
-# 二次元老婆匹配器 (Waifu Match)
+# Anime Friends
 
 > 穿越彩虹闪烁的次元之门，找到与你灵魂共鸣的她。
 
-[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-brightgreen)](https://weed33834.github.io/waifu-match/)
-[![Stars](https://img.shields.io/github/stars/weed33834/waifu-match?style=social)](https://github.com/weed33834/waifu-match/stargazers)
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-brightgreen)](https://weed33834.github.io/Anime-Friends/)
+[![Stars](https://img.shields.io/github/stars/weed33834/Anime-Friends?style=social)](https://github.com/weed33834/Anime-Friends/stargazers)
 
 ## 在线体验
 
-**GitHub Pages:** https://weed33834.github.io/waifu-match/
+**GitHub Pages:** https://weed33834.github.io/Anime-Friends/
 
 **秒哒平台:** https://app-dlcivqqgr30h.appmiaoda.com
 
@@ -25,6 +25,7 @@
 - **多页面体验** - 测试 / 图鉴 / 排行 / 对比 / 统计
 - **深色星空风格** - 粒子动效 + 粉紫渐变配色
 - **移动端适配** - 全平台流畅体验
+- **本地图片** - 所有角色图片随仓库部署，无需外部 CDN
 
 ## 收录作品
 
@@ -45,15 +46,14 @@
 - **Canvas 雷达图** - 12 维性格可视化对比
 - **localStorage** - 浏览统计持久化
 - **CSS 动画** - 页面切换/卡片悬浮/流光效果
+- **本地图片资源** - 88 张角色立绘随仓库部署
 
 ## 部署方式
 
 ### GitHub Pages（推荐）
 
-1. Fork 本仓库或将其克隆到本地
-2. 确保仓库名为 `waifu-match` 或包含 `index.html`
-3. 进入 Settings → Pages → Source 选择 main 分支
-4. 等待 1-2 分钟即可通过 `https://你的用户名.github.io/waifu-match/` 访问
+本仓库已配置 GitHub Actions 自动部署，访问链接即可：
+**https://weed33834.github.io/Anime-Friends/**
 
 ### 本地预览
 
@@ -70,7 +70,7 @@ python3 -m http.server 8000
 - 外貌描述（详细外貌描写）
 - 性格介绍（150-200 字深度分析）
 - 12 维性格评分（0-100）
-- 角色立绘图片 URL
+- 角色立绘图片（本地 images/ 目录）
 - 经典台词
 - 声优信息
 - 生日
@@ -95,6 +95,10 @@ python3 -m http.server 8000
 ```
 .
 ├── index.html          # 主应用文件（单文件，163KB）
+├── images/             # 88 张角色立绘图片
+│   ├── saber.jpg
+│   ├── rin.jpg
+│   └── ...
 ├── README.md           # 项目说明
 ├── LICENSE             # MIT 许可证
 └── .github/
