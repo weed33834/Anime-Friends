@@ -153,7 +153,8 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg);color:var(--text
 .img-placeholder{display:flex;align-items:center;justify-content:center;background:var(--card2);color:var(--dim);font-size:14px;min-height:200px}
 .toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:var(--card);border:1px solid var(--accent);border-radius:8px;padding:12px 24px;font-size:14px;z-index:200;opacity:0;transition:opacity .3s;pointer-events:none}
 .toast.show{opacity:1}
-@media(max-width:600px){.home-title{font-size:32px}.quiz-card{padding:20px 16px}.quiz-question{font-size:18px}.gallery-grid{grid-template-columns:repeat(2,1fr)}.rec-grid{grid-template-columns:repeat(2,1fr)}.result-image-wrap img{max-height:350px}.compare-grid{grid-template-columns:1fr}.compare-vs{display:none}.result-meta{grid-template-columns:1fr}.home-stats{gap:16px}.mini-radar-wrap{display:none!important}.nav-links{gap:0}.nav-link{padding:6px 8px;font-size:12px}}
+@media(max-width:600px){.home-title{font-size:28px}.home-desc{font-size:14px}.home-badge{font-size:12px}.quiz-card{padding:20px 16px}.quiz-question{font-size:17px}.quiz-option{padding:14px;font-size:14px}.quiz-option-letter{width:28px;height:28px;font-size:13px}.gallery-grid{grid-template-columns:repeat(2,1fr);gap:12px}.gallery-image-wrap{min-height:160px}.rec-grid{grid-template-columns:repeat(2,1fr)}.result-image-wrap img{max-height:350px}.result-name{font-size:22px}.result-match{font-size:28px}.compare-grid{grid-template-columns:1fr}.compare-vs{display:none}.result-meta{grid-template-columns:1fr}.home-stats{gap:12px}.home-stat-num{font-size:26px}.mini-radar-wrap{display:none!important}.nav-bar{padding:0 12px;height:50px}.nav-logo{font-size:15px}.nav-links{gap:0}.nav-link{padding:5px 6px;font-size:11px}.page{padding:60px 12px 30px}.btn{padding:12px 24px;font-size:14px}.result-analysis{padding:16px}.result-analysis h3{font-size:15px}.result-analysis p{font-size:13px;line-height:1.7}.result-favor-quote{padding:16px}.result-favor-quote p{font-size:14px}.modal-content{max-width:95vw}.modal-image-wrap img{max-height:300px}.modal-body{padding:16px}.rank-item{padding:10px;gap:10px}.rank-image{width:50px;height:50px}.rank-name{font-size:14px}.bar-label{width:50px;font-size:12px}.stats-grid{grid-template-columns:repeat(2,1fr)}.search-bar{font-size:13px}.filter-chip{padding:5px 10px;font-size:12px}.radar-chart-wrap canvas{max-width:100%;height:auto!important}}
+@media(max-width:380px){.home-title{font-size:24px}.gallery-grid{grid-template-columns:1fr}.nav-link{padding:4px 5px;font-size:10px}.home-stat-num{font-size:22px}}
 </style>
 </head>
 <body>
@@ -236,7 +237,7 @@ return scenes.join('')}
 function genRival(u,c){
 var rivals=CH.filter(function(x){return x.id!==c.id}).map(function(x){var cv2={};DM.forEach(function(d,i){cv2[d.key]=x.traits[i]});return{id:x.id,name:x.name,series:x.series,image:x.image,score:matchScore(u,x)}}).sort(function(a,b){return b.score-a.score}).slice(0,3);
 var h='<div style="display:flex;gap:12px;flex-wrap:wrap">';
-rivals.forEach(function(r){h+='<div style="flex:1;min-width:100px;text-align:center;cursor:pointer" onclick="showDetail(''+r.id+'')"><div style="background:var(--card);border:1px solid var(--border);border-radius:8px;overflow:hidden"><div style="aspect-ratio:1;overflow:hidden;display:flex;align-items:center;justify-content:center;background:var(--card2)"><img src="'+r.image+'" style="max-width:100%;max-height:100%;object-fit:contain" onerror="this.style.display='none'" loading="lazy"></div><div style="padding:6px"><div style="font-size:12px;font-weight:600">'+r.name+'</div><div style="font-size:11px;color:var(--accent)">'+r.score+'%</div></div></div></div>'});
+rivals.forEach(function(r){h+='<div style="flex:1;min-width:100px;text-align:center;cursor:pointer" onclick="showDetail(\''+r.id+'\')"><div style="background:var(--card);border:1px solid var(--border);border-radius:8px;overflow:hidden"><div style="aspect-ratio:1;overflow:hidden;display:flex;align-items:center;justify-content:center;background:var(--card2)"><img src="'+r.image+'" style="max-width:100%;max-height:100%;object-fit:contain" onerror="this.style.display=\'none\'" loading="lazy"></div><div style="padding:6px"><div style="font-size:12px;font-weight:600">'+r.name+'</div><div style="font-size:11px;color:var(--accent)">'+r.score+'%</div></div></div></div>'});
 h+='</div>';return h}
 function genAnalysis(u,c){
 var top=[],bottom=[];DM.forEach(function(d,i){if(u[d.key]>65)top.push({label:d.label,key:d.key,uv:u[d.key],cv:c.traits[i],idx:i});if(u[d.key]<40)bottom.push({label:d.label,key:d.key,uv:u[d.key],cv:c.traits[i],idx:i})});top.sort(function(a,b){return b.uv-a.uv});
@@ -257,20 +258,14 @@ return p}
 function genShareText(c,score,u){
 var s=DM.map(function(d,i){return{label:d.label,val:u[d.key]}}).sort(function(a,b){return b.val-a.val});
 var top3=s.slice(0,3).map(function(d){return d.label}).join('、');
-var txt='我的二次元老婆是'+c.name+'（'+c.series+'）！
-契合度：'+score+'%
-性格标签：'+top3+'
-
-'+c.quote+'
-
-来测测你的命运之人是谁→';
+var txt='我的二次元老婆是'+c.name+'（'+c.series+'）！\n契合度：'+score+'%\n性格标签：'+top3+'\n\n'+c.quote+'\n\n来测测你的命运之人是谁→';
 return txt}
 function renderResult(){
 var u=calcUser();var sc=CH.map(function(c){var cc={};cc.id=c.id;cc.name=c.name;cc.series=c.series;cc.tags=c.tags;cc.description=c.description;cc.appearance=c.appearance;cc.traits=c.traits;cc.image=c.image;cc.quote=c.quote;cc.cv=c.cv;cc.birthday=c.birthday;cc.catchphrase=c.catchphrase;cc.color=c.color;cc.favor_quote=c.favor_quote;cc.ms=matchScore(u,c);return cc}).sort(function(a,b){return b.ms-a.ms});
 var b=sc[0],t5=sc.slice(0,5);
 var tags=b.tags.split(',');var an=genAnalysis(u,b);var pf=genProfile(u);var enc=genEncounter(u,b);var dl=genDailyLife(u,b);var rv=genRival(u,b);var st=genShareText(b,b.ms,u);
 document.documentElement.style.setProperty('--accent',b.color||'#e879f9');
-var h='<div class="result-card"><div class="result-image-wrap"><img src="'+b.image+'" alt="'+b.name+'" onerror="this.parentNode.innerHTML='<div class=&quot;img-placeholder&quot;>'+b.name+'</div>'" loading="lazy"></div>';
+var h='<div class="result-card"><div class="result-image-wrap"><img src="'+b.image+'" alt="'+b.name+'" onerror="this.style.display=\'none\'" loading="lazy"></div>';
 h+='<div class="result-info"><div class="result-series">'+b.series+'</div><h2 class="result-name">'+b.name+'</h2><div class="result-match">契合度 '+b.ms+'%</div>';
 h+='<div class="result-tags">';tags.forEach(function(t){h+='<span class="result-tag">'+t+'</span>'});h+='</div>';
 h+='<p class="result-desc">'+b.appearance+'</p>';
@@ -285,10 +280,9 @@ h+='<div class="radar-chart-wrap"><canvas id="radar" width="400" height="400"></
 h+='<div class="result-analysis"><h3>你们的相处日常</h3><p>'+dl+'</p></div>';
 h+='<div class="result-analysis"><h3>潜在情敌分析</h3><p style="margin-bottom:12px">以下角色也与你高度契合，可能会成为你追求'+b.name+'的竞争对手：</p>'+rv+'</div>';
 h+='<div class="result-recommendations"><h3>Top 5 推荐角色</h3><div class="rec-grid">';
-t5.slice(1).forEach(function(c){h+='<div class="rec-card" onclick='showDetail("'+c.id+'")'><div class="rec-image-wrap"><img src="'+c.image+'" alt="'+c.name+'" onerror="this.style.display='none'" loading="lazy"></div><div class="rec-info"><div class="rec-name">'+c.name+'</div><div class="rec-match">'+c.ms+'%</div></div></div>'});
+t5.slice(1).forEach(function(c){h+='<div class="rec-card" onclick="showDetail(\''+c.id+'\')"><div class="rec-image-wrap"><img src="'+c.image+'" alt="'+c.name+'" onerror="this.style.display=\'none\'" loading="lazy"></div><div class="rec-info"><div class="rec-name">'+c.name+'</div><div class="rec-match">'+c.ms+'%</div></div></div>'});
 h+='</div></div>';
-h+='<div class="share-section"><h3>分享你的结果</h3><div class="share-text" id="shareText">'+st.replace(/
-/g,'<br>')+'</div><button class="btn btn-primary btn-sm" onclick="copyShareText()">复制分享文案</button></div>';
+h+='<div class="share-section"><h3>分享你的结果</h3><div class="share-text" id="shareText">'+st.replace(/\n/g,'<br>')+'</div><button class="btn btn-primary btn-sm" onclick="copyShareText()">复制分享文案</button></div>';
 document.getElementById('resultContent').innerHTML=h;
 drawRadar(u,b);
 viewStats[b.id]=(viewStats[b.id]||0)+1;try{localStorage.setItem('waifuViewStats',JSON.stringify(viewStats))}catch(e){}
@@ -311,13 +305,13 @@ cx.beginPath();for(var i=0;i<=n;i++){var a=i*as-Math.PI/2;var r=R;var x=ccx+Math
 cx.beginPath();DM.forEach(function(d,i){var a=i*as-Math.PI/2;var r=R*(u[d.key]/100);var x=ccx+Math.cos(a)*r;var y=ccy+Math.sin(a)*r;if(i===0)cx.moveTo(x,y);else cx.lineTo(x,y)});cx.closePath();cx.fillStyle='rgba(232,121,249,0.2)';cx.strokeStyle='rgba(232,121,249,0.8)';cx.lineWidth=1.5;cx.fill();cx.stroke()}
 function renderGallery(){
 var series=[].concat(new Set(CH.map(function(c){return c.series}))).sort();
-var fh='<button class="filter-chip '+(curFilter===''?'active':'')+'" onclick="setFilter('')">全部</button>';
-series.forEach(function(s){fh+='<button class="filter-chip '+(curFilter===s?'active':'')+'" onclick="setFilter(''+s.replace(/'/g,"\'")+'')">'+s+'</button>'});
+var fh='<button class="filter-chip '+(curFilter===''?'active':'')+'" onclick="setFilter(\'\')">全部</button>';
+series.forEach(function(s){fh+='<button class="filter-chip '+(curFilter===s?'active':'')+'" onclick="setFilter(\''+s.replace(/'/g,"\\'")+'\')">'+s+'</button>'});
 document.getElementById('filterBar').innerHTML=fh;
 var filtered=CH;
 if(curFilter)filtered=filtered.filter(function(c){return c.series===curFilter});
 if(searchQuery)filtered=filtered.filter(function(c){return c.name.toLowerCase().includes(searchQuery.toLowerCase())||c.series.toLowerCase().includes(searchQuery.toLowerCase())||c.tags.toLowerCase().includes(searchQuery.toLowerCase())});
-var gh='';filtered.forEach(function(c){gh+='<div class="gallery-card" onclick='showDetail("'+c.id+'")'><div class="gallery-image-wrap"><img src="'+c.image+'" alt="'+c.name+'" onerror="this.parentNode.innerHTML='<div class=\'img-placeholder\'>'+c.name+'</div>'" loading="lazy"></div><div class="gallery-info"><div class="gallery-name">'+c.name+'</div><div class="gallery-series">'+c.series+'</div></div></div>'});
+var gh='';filtered.forEach(function(c){gh+='<div class="gallery-card" onclick="showDetail(\''+c.id+'\')"><div class="gallery-image-wrap"><img src="'+c.image+'" alt="'+c.name+'" onerror="this.style.display=\'none\'" loading="lazy"></div><div class="gallery-info"><div class="gallery-name">'+c.name+'</div><div class="gallery-series">'+c.series+'</div></div></div>'});
 document.getElementById('galleryGrid').innerHTML=gh||'<p style="color:var(--dim);text-align:center;padding:40px">没有找到匹配的角色</p>'}
 function onSearch(v){searchQuery=v;renderGallery()}
 function setFilter(s){curFilter=s;renderGallery()}
@@ -326,17 +320,17 @@ var list=CH.map(function(c){return{id:c.id,name:c.name,series:c.series,image:c.i
 if(list.every(function(c){return c.views===0})){
 list=CH.map(function(c){return{id:c.id,name:c.name,series:c.series,image:c.image,tags:c.tags,views:Math.floor(Math.random()*100)+1,traits:c.traits}}).sort(function(a,b){return b.views-a.views})}
 var h='';list.slice(0,20).forEach(function(c,i){var rn=i+1;var rc=rn<=3?'top'+rn:'';var top3=c.tags.split(',').slice(0,3).join(' · ');
-h+='<div class="rank-item" onclick='showDetail("'+c.id+'")'><div class="rank-num '+rc+'">'+rn+'</div><div class="rank-image"><img src="'+c.image+'" alt="'+c.name+'" onerror="this.style.display='none'" loading="lazy"></div><div class="rank-info"><div class="rank-name">'+c.name+'</div><div class="rank-series">'+c.series+'</div><div class="rank-traits">'+top3+'</div></div><div class="rank-score">'+c.views+'次</div></div>'});
+h+='<div class="rank-item" onclick="showDetail(\''+c.id+'\')"><div class="rank-num '+rc+'">'+rn+'</div><div class="rank-image"><img src="'+c.image+'" alt="'+c.name+'" onerror="this.style.display=\'none\'" loading="lazy"></div><div class="rank-info"><div class="rank-name">'+c.name+'</div><div class="rank-series">'+c.series+'</div><div class="rank-traits">'+top3+'</div></div><div class="rank-score">'+c.views+'次</div></div>'});
 document.getElementById('rankingList').innerHTML=h}
 function renderCompare(){
 var s1=document.getElementById('compareSlot1'),s2=document.getElementById('compareSlot2');
-[compareSel[0],compareSel[1]].forEach(function(c,i){var slot=i===0?s1:s2;if(!c){slot.className='compare-slot';slot.innerHTML='<div class="compare-empty">点击选择角色</div>'}else{slot.className='compare-slot has-char';slot.innerHTML='<div class="compare-image-wrap"><img src="'+c.image+'" alt="'+c.name+'" onerror="this.style.display='none'"></div><div style="font-size:15px;font-weight:600;text-align:center">'+c.name+'</div><div style="font-size:12px;color:var(--dim);text-align:center">'+c.series+'</div><div style="font-size:11px;color:var(--accent);margin-top:4px;text-align:center">点击更换</div>'}});
+[compareSel[0],compareSel[1]].forEach(function(c,i){var slot=i===0?s1:s2;if(!c){slot.className='compare-slot';slot.innerHTML='<div class="compare-empty">点击选择角色</div>'}else{slot.className='compare-slot has-char';slot.innerHTML='<div class="compare-image-wrap"><img src="'+c.image+'" alt="'+c.name+'" onerror="this.style.display=\'none\'"></div><div style="font-size:15px;font-weight:600;text-align:center">'+c.name+'</div><div style="font-size:12px;color:var(--dim);text-align:center">'+c.series+'</div><div style="font-size:11px;color:var(--accent);margin-top:4px;text-align:center">点击更换</div>'}});
 if(compareSel[0]&&compareSel[1]){document.getElementById('compareResult').style.display='block';drawCompareRadar();renderCompareDetails()}else{document.getElementById('compareResult').style.display='none'}}
 function openComparePicker(slot){pickerTarget=slot;document.getElementById('pickerSearch').value='';renderPicker('');document.getElementById('pickerModal').classList.add('active')}
 function renderPicker(q){
 var filtered=CH;if(q)filtered=CH.filter(function(c){return c.name.toLowerCase().includes(q.toLowerCase())||c.series.toLowerCase().includes(q.toLowerCase())});
 var h='<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px">';
-filtered.forEach(function(c){h+='<div style="background:var(--card2);border:1px solid var(--border);border-radius:8px;overflow:hidden;cursor:pointer" onclick="pickChar(''+c.id+'')"><div style="aspect-ratio:1;overflow:hidden;display:flex;align-items:center;justify-content:center;background:var(--bg)"><img src="'+c.image+'" style="max-width:100%;max-height:100%;object-fit:contain" onerror="this.style.display='none'" loading="lazy"></div><div style="padding:4px;font-size:11px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+c.name+'</div></div>'});
+filtered.forEach(function(c){h+='<div style="background:var(--card2);border:1px solid var(--border);border-radius:8px;overflow:hidden;cursor:pointer" onclick="pickChar(\''+c.id+'\')"><div style="aspect-ratio:1;overflow:hidden;display:flex;align-items:center;justify-content:center;background:var(--bg)"><img src="'+c.image+'" style="max-width:100%;max-height:100%;object-fit:contain" onerror="this.style.display=\'none\'" loading="lazy"></div><div style="padding:4px;font-size:11px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+c.name+'</div></div>'});
 h+='</div>';document.getElementById('pickerGrid').innerHTML=h}
 function onPickerSearch(v){renderPicker(v)}
 function pickChar(id){compareSel[pickerTarget-1]=CH.find(function(c){return c.id===id});closePicker();renderCompare()}
@@ -384,7 +378,7 @@ function showDetail(id){
 var c=CH.find(function(x){return x.id===id});if(!c)return;
 viewStats[id]=(viewStats[id]||0)+1;try{localStorage.setItem('waifuViewStats',JSON.stringify(viewStats))}catch(e){}
 var tags=c.tags.split(',');
-var h='<div class="modal-image-wrap"><img src="'+c.image+'" alt="'+c.name+'" onerror="this.style.display='none'" loading="lazy"></div><div class="modal-body">';
+var h='<div class="modal-image-wrap"><img src="'+c.image+'" alt="'+c.name+'" onerror="this.style.display=\'none\'" loading="lazy"></div><div class="modal-body">';
 h+='<div style="font-size:13px;color:var(--accent);margin-bottom:4px">'+c.series+'</div><h2 style="font-size:24px;margin-bottom:8px">'+c.name+'</h2>';
 h+='<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">';tags.forEach(function(t){h+='<span class="result-tag">'+t+'</span>'});h+='</div>';
 h+='<div class="result-meta"><div class="result-meta-item"><div class="result-meta-label">声优</div><div class="result-meta-val" style="font-size:13px">'+c.cv+'</div></div><div class="result-meta-item"><div class="result-meta-label">生日</div><div class="result-meta-val" style="font-size:13px">'+c.birthday+'</div></div><div class="result-meta-item"><div class="result-meta-label">口癖</div><div class="result-meta-val" style="font-size:11px">'+c.catchphrase+'</div></div></div>';
