@@ -304,7 +304,7 @@ cx.clearRect(0,0,80,80);
 cx.beginPath();for(var i=0;i<=n;i++){var a=i*as-Math.PI/2;var r=R;var x=ccx+Math.cos(a)*r;var y=ccy+Math.sin(a)*r;if(i===0)cx.moveTo(x,y);else cx.lineTo(x,y)}cx.strokeStyle='rgba(232,121,249,0.2)';cx.lineWidth=1;cx.stroke();
 cx.beginPath();DM.forEach(function(d,i){var a=i*as-Math.PI/2;var r=R*(u[d.key]/100);var x=ccx+Math.cos(a)*r;var y=ccy+Math.sin(a)*r;if(i===0)cx.moveTo(x,y);else cx.lineTo(x,y)});cx.closePath();cx.fillStyle='rgba(232,121,249,0.2)';cx.strokeStyle='rgba(232,121,249,0.8)';cx.lineWidth=1.5;cx.fill();cx.stroke()}
 function renderGallery(){
-var series=[].concat(new Set(CH.map(function(c){return c.series}))).sort();
+var series=Array.from(new Set(CH.map(function(c){return c.series}))).sort();
 var fh='<button class="filter-chip '+(curFilter===''?'active':'')+'" onclick="setFilter(\'\')">全部</button>';
 series.forEach(function(s){fh+='<button class="filter-chip '+(curFilter===s?'active':'')+'" onclick="setFilter(\''+s.replace(/'/g,"\\'")+'\')">'+s+'</button>'});
 document.getElementById('filterBar').innerHTML=fh;
