@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>二次元老婆匹配器 - 80角色12维度精准匹配</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+--pink:#e879f9;--purple:#a855f7;--bg:#0b0a12;--card:#15131f;--card2:#1d1b2e;
+--text:#f8f7fc;--dim:#9ca3af;--border:rgba(232,121,249,0.25);
+--radius:16px;
+}
+html{scroll-behavior:smooth}
+body{
+font-family:'Noto Sans SC',sans-serif;
+background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;
+}
+#particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.page{display:none;position:relative;z-index:1;min-height:100vh;padding:20px;max-width:800px;margin:0 auto}
+.page.active{display:block}
+.page-enter{animation:fadeIn .5s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.btn{
+padding:14px 32px;border:none;border-radius:12px;font-size:16px;font-weight:700;
+cursor:pointer;transition:all .3s;display:inline-flex;align-items:center;gap:8px;
+font-family:inherit;
+}
+.btn-primary{
+background:linear-gradient(135deg,var(--pink),var(--purple));
+color:#fff;box-shadow:0 4px 20px rgba(168,85,247,0.4);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(168,85,247,0.5)}
+.btn-ghost{
+background:transparent;color:var(--text);
+border:1px solid var(--border);
+}
+.btn-ghost:hover{background:rgba(232,121,249,0.1)}
+/* HOME */
+.home-hero{text-align:center;padding:40px 0}
+.home-badge{
+display:inline-block;padding:6px 16px;border-radius:20px;
+background:rgba(232,121,249,0.1);border:1px solid var(--border);
+font-size:13px;color:var(--pink);margin-bottom:24px;
+}
+.home-title{
+font-family:'ZCOOL KuaiLe',cursive;font-size:42px;line-height:1.3;margin-bottom:16px;
+}
+.home-title .grad{
+background:linear-gradient(135deg,var(--pink),var(--purple));
+-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.home-desc{color:var(--dim);font-size:15px;line-height:1.8;margin-bottom:32px;max-width:500px;margin-left:auto;margin-right:auto}
+.home-buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+/* QUIZ */
+.quiz-header{margin-bottom:24px}
+.quiz-progress-text{text-align:center;font-size:14px;color:var(--dim);margin-bottom:8px}
+.quiz-progress-bar{width:100%;height:6px;background:var(--card);border-radius:3px;overflow:hidden}
+.quiz-progress-fill{height:100%;background:linear-gradient(90deg,var(--pink),var(--purple));border-radius:3px;transition:width .3s}
+.quiz-card{
+background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+padding:32px 24px;margin-bottom:24px;
+}
+.quiz-question{font-size:20px;font-weight:700;margin-bottom:24px;line-height:1.5}
+.quiz-options{display:flex;flex-direction:column;gap:12px}
+.quiz-option{
+padding:16px;border:1px solid var(--border);border-radius:12px;
+background:var(--card2);cursor:pointer;transition:all .2s;
+display:flex;align-items:center;gap:12px;font-size:15px;color:var(--text);
+font-family:inherit;text-align:left;
+}
+.quiz-option:hover{border-color:var(--pink);background:rgba(232,121,249,0.05)}
+.quiz-option.selected{
+border-color:var(--pink);background:rgba(232,121,249,0.15);
+box-shadow:0 0 0 1px var(--pink);
+}
+.quiz-option-letter{
+width:32px;height:32px;border-radius:50%;border:2px solid var(--border);
+display:flex;align-items:center;justify-content:center;font-weight:700;
+flex-shrink:0;transition:all .2s;
+}
+.quiz-option.selected .quiz-option-letter{
+border-color:var(--pink);background:var(--pink);color:#fff;
+}
+.quiz-nav{display:flex;justify-content:space-between;gap:12px}
+/* RESULT */
+.result-card{
+background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+overflow:hidden;margin-bottom:24px;
+}
+.result-image-wrap{
+width:100%;background:var(--card2);display:flex;align-items:center;
+justify-content:center;overflow:hidden;
+}
+.result-image-wrap img{
+max-width:100%;max-height:500px;object-fit:contain;display:block;
+}
+.result-info{padding:24px}
+.result-series{font-size:13px;color:var(--pink);margin-bottom:4px}
+.result-name{font-size:28px;font-weight:700;margin-bottom:8px}
+.result-match{font-size:36px;font-weight:900;background:linear-gradient(135deg,var(--pink),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.result-tags{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.result-tag{padding:4px 12px;border-radius:20px;background:rgba(232,121,249,0.1);font-size:12px;color:var(--pink)}
+.result-desc{color:var(--dim);font-size:14px;line-height:1.8;margin:16px 0}
+.result-analysis{
+background:var(--card2);border-radius:12px;padding:20px;margin:16px 0;
+border-left:3px solid var(--pink);
+}
+.result-analysis h3{font-size:16px;margin-bottom:12px;color:var(--pink)}
+.result-analysis p{font-size:14px;line-height:1.8;color:var(--text)}
+.radar-chart-wrap{display:flex;justify-content:center;margin:24px 0}
+.result-recommendations{margin-top:24px}
+.result-recommendations h3{font-size:18px;margin-bottom:16px}
+.rec-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px}
+.rec-card{
+background:var(--card2);border:1px solid var(--border);border-radius:12px;
+overflow:hidden;cursor:pointer;transition:all .2s;
+}
+.rec-card:hover{border-color:var(--pink);transform:translateY(-2px)}
+.rec-image-wrap{
+width:100%;aspect-ratio:3/4;overflow:hidden;background:var(--bg);
+}
+.rec-image-wrap img{width:100%;height:100%;object-fit:cover}
+.rec-info{padding:8px}
+.rec-name{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rec-match{font-size:12px;color:var(--pink)}
+/* GALLERY */
+.gallery-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+.gallery-title{font-size:24px;font-weight:700}
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px}
+.gallery-card{
+background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+overflow:hidden;cursor:pointer;transition:all .2s;
+}
+.gallery-card:hover{border-color:var(--pink);transform:translateY(-4px);box-shadow:0 8px 30px rgba(168,85,247,0.2)}
+.gallery-image-wrap{
+width:100%;background:var(--card2);overflow:hidden;
+display:flex;align-items:center;justify-content:center;min-height:200px;
+}
+.gallery-image-wrap img{
+max-width:100%;max-height:300px;object-fit:contain;display:block;
+}
+.gallery-info{padding:12px}
+.gallery-name{font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gallery-series{font-size:12px;color:var(--dim);margin-top:2px}
+/* MODAL */
+.modal-overlay{
+position:fixed;top:0;left:0;width:100%;height:100%;
+background:rgba(0,0,0,0.8);z-index:100;display:none;
+align-items:center;justify-content:center;padding:20px;
+}
+.modal-overlay.active{display:flex}
+.modal-content{
+background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+max-width:500px;max-height:90vh;overflow-y:auto;width:100%;
+}
+.modal-image-wrap{
+width:100%;background:var(--card2);display:flex;align-items:center;
+justify-content:center;overflow:hidden;
+}
+.modal-image-wrap img{max-width:100%;max-height:400px;object-fit:contain}
+.modal-body{padding:24px}
+.modal-close{
+position:absolute;top:16px;right:16px;width:36px;height:36px;
+border-radius:50%;background:rgba(0,0,0,0.5);border:none;color:#fff;
+font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;
+}
+/* MOBILE */
+@media(max-width:600px){
+.home-title{font-size:32px}
+.quiz-card{padding:20px 16px}
+.quiz-question{font-size:18px}
+.gallery-grid{grid-template-columns:repeat(2,1fr)}
+.rec-grid{grid-template-columns:repeat(2,1fr)}
+.result-image-wrap img{max-height:350px}
+}
+.watermark{position:fixed;bottom:12px;right:12px;font-size:11px;color:rgba(255,255,255,0.3);z-index:50}
+</style>
+</head>
+<body>
+<canvas id="particles"></canvas>
+
+<!-- HOME PAGE -->
+<div class="page active" id="page-home">
+  <div class="home-hero">
+    <div class="home-badge">80位经典角色 12维性格精准匹配</div>
+    <h1 class="home-title">二次元老婆<span class="grad">匹配器</span></h1>
+    <p class="home-desc">穿越霓虹闪烁的次元之门，回答 36 道精心设计的性格测试题，我们将从 80 位人气 galgame 与动漫角色中，用余弦相似度混合加权欧氏距离算法，找到与你灵魂共鸣的她。</p>
+    <div class="home-buttons">
+      <button class="btn btn-primary" onclick="goQuiz()">开始测试</button>
+      <button class="btn btn-ghost" onclick="goGallery()">角色图鉴</button>
+    </div>
+  </div>
+</div>
+
+<!-- QUIZ PAGE -->
+<div class="page" id="page-quiz">
+  <div class="quiz-header">
+    <div class="quiz-progress-text" id="quizProgress">第 1 / 36 题</div>
+    <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="quizBar" style="width:2.7%"></div></div>
+  </div>
+  <div class="quiz-card" id="quizCard"></div>
+  <div class="quiz-nav">
+    <button class="btn btn-ghost" id="btnPrev" onclick="prevQuestion()">上一题</button>
+    <button class="btn btn-primary" id="btnNext" onclick="nextQuestion()">下一题</button>
+  </div>
+</div>
+
+<!-- RESULT PAGE -->
+<div class="page" id="page-result">
+  <div id="resultContent"></div>
+  <div style="text-align:center;margin-top:24px">
+    <button class="btn btn-primary" onclick="goQuiz()">重新测试</button>
+    <button class="btn btn-ghost" onclick="goGallery()">角色图鉴</button>
+  </div>
+</div>
+
+<!-- GALLERY PAGE -->
+<div class="page" id="page-gallery">
+  <div class="gallery-header">
+    <div class="gallery-title">角色图鉴</div>
+    <button class="btn btn-ghost" onclick="goHome()">返回首页</button>
+  </div>
+  <p style="color:var(--dim);font-size:14px;margin-bottom:16px">共 80 位角色 - 点击卡片查看详情</p>
+  <div class="gallery-grid" id="galleryGrid"></div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" onclick="closeModal(event)">
+  <div class="modal-content" style="position:relative" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<div class="watermark">DuMate</div>
+
+<script>
+// DATA
+const CHARACTERS = [{"id": "saber", "name": "Fate/stay night", "series": "骑士王,忠诚,正义", "tags": "阿尔托莉雅·潘德拉贡，不列颠的王者，持誓约胜利之剑的少女骑士。她以坚定的信念和高洁的品格著称，虽然外表冷静，内心却有着对美食的热爱和对和平的渴望。", "description": "金发碧眼，常扎单马尾，身穿蓝色骑士甲胄，手持金色圣剑", "appearance": [85, 60, 80, 30, 95, 40, 90, 85, 50, 70, 60, 50], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_b59af897-3bdc-40b9-aae4-1d457e1ee635.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_b59af897-3bdc-40b9-aae4-1d457e1ee635.jpg"}, {"id": "rin", "name": "Fate/stay night", "series": "傲娇,天才,红色外套", "tags": "远坂凛，远坂家的继承人，擅长宝石魔术的红色背影。表面上是完美的优等生，实则是个笨拙又可爱的傲娇。她嘴上说着不在意，身体却很诚实，是那种关键时刻绝对不会放弃的类型。", "description": "黑色双马尾，穿着红色外套和黑色短裙，佩戴黑色过膝袜", "appearance": [70, 75, 85, 50, 75, 90, 80, 78, 60, 85, 70, 60], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_7185272a-4c3c-4067-b37f-f64013e6001c.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_7185272a-4c3c-4067-b37f-f64013e6001c.jpg"}, {"id": "sakura", "name": "Fate/stay night", "series": "温柔,黑化,紫发", "tags": "间桐樱，沉静温柔的紫发少女，背后隐藏着不为人知的苦痛过去。她的温柔如同春日暖阳，但在那柔和的外表下，潜藏着惊人的意志力。", "description": "紫发紫瞳，常穿白色衬衫搭配黑色外套，气质沉静", "appearance": [90, 40, 55, 35, 85, 30, 75, 65, 70, 40, 80, 45], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_8f1e4abc-1d32-4e91-8a48-c3586bcacff2.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_8f1e4abc-1d32-4e91-8a48-c3586bcacff2.jpg"}, {"id": "illya", "name": "Fate/stay night", "series": "萝莉,银发,双面", "tags": "伊莉雅丝菲尔·冯·爱因兹贝伦，银发红瞳的少女，既是天真的孩子也是残酷的战士。她的存在本身就是一场悲剧，但她用天真笑容掩盖了内心的孤独。", "description": "银发红瞳，戴白色帽子，穿着紫色连衣裙和白色披肩", "appearance": [65, 70, 50, 60, 70, 55, 65, 40, 80, 60, 75, 55], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_af9809dd-154a-41d1-a199-e115b57aed73.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_af9809dd-154a-41d1-a199-e115b57aed73.jpg"}, {"id": "medusa", "name": "Fate/stay night", "series": "神秘,眼镜,高挑", "tags": "美杜莎，被诅咒的戈尔贡三女之一，以理性克制的态度面对一切。她戴着眼镜压制魔力，摘下眼镜时展现出惊人的战斗力。高挑身材和紫色长发让她在人群中格外醒目。", "description": "粉色长发，戴眼镜，穿黑色紧身衣，身材高挑", "appearance": [60, 65, 80, 35, 80, 45, 85, 75, 90, 55, 50, 40], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_7a44d630-9477-4440-9591-c26e461fb6eb.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_7a44d630-9477-4440-9591-c26e461fb6eb.jpg"}, {"id": "taiga", "name": "Fate/stay night", "series": "活力,大姐头,竹刀", "tags": "藤村大河，2年B班的英语教师，大河（大河 = 老虎的谐音）是她的绰号。她性格开朗直率，常拿着竹刀在走廊奔跑，是那种让人又爱又怕的热血教师类型。", "description": "棕色短发，穿橙色运动服，常持竹刀", "appearance": [75, 95, 70, 80, 70, 30, 50, 60, 20, 90, 85, 80], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_7f6e7a1d-0140-4e16-9eeb-301533572d87.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_7f6e7a1d-0140-4e16-9eeb-301533572d87.jpg"}, {"id": "nagisa", "name": "Clannad", "series": "温柔,内向,团子", "tags": "古河渚，身体虚弱但内心坚强的少女，梦想复兴话剧部。她的标志性口头禅是喜欢的东西，那首关于团子大家族的歌承载着她对温暖家庭的渴望。", "description": "棕色短发，海星状发卡，穿着黄色校服", "appearance": [95, 45, 50, 40, 90, 25, 70, 65, 30, 50, 85, 40], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_9ad7bda9-3379-491f-ba34-af838e146901.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_9ad7bda9-3379-491f-ba34-af838e146901.jpg"}, {"id": "kyou", "name": "Clannad", "series": "暴力,杏,长直", "tags": "藤林杏，光明智代都畏惧的暴力女，实则内心细腻的温暖少女。她总是用凶巴巴的态度掩饰对妹妹和朋友的关心，是那种默默付出不求回报的类型。", "description": "紫色长发，常抱着一只野猪玩偶，穿校服", "appearance": [70, 80, 75, 75, 85, 70, 60, 65, 30, 80, 75, 70], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_d7d4375f-0c52-4f73-94d4-b081bc67f260.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_d7d4375f-0c52-4f73-94d4-b081bc67f260.jpg"}, {"id": "tomoyo", "name": "Clannad", "series": "帅气,打架,完美", "tags": "坂上智代，转学到光坂高校的完美超人，打架无敌且学习优秀。她为了守护樱花道而转学，那份对美好事物的执着让人动容。", "description": "银色短发，蓝色眼眸，穿水手服校服", "appearance": [75, 85, 90, 55, 85, 35, 80, 80, 40, 85, 60, 65], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_e6fd1d20-6010-4bf6-8db6-c0195718aa70.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_e6fd1d20-6010-4bf6-8db6-c0195718aa70.jpg"}, {"id": "kotomi", "name": "Clannad", "series": "天才,提琴,书虫", "tags": "一之濑琴美，智商超群的天才少女，却不善社交。她总是在图书馆安静地看书或拉小提琴（虽然拉得很难听），内心深处藏着对父母的思念。", "description": "紫色长发，戴大蝴蝶结发饰，穿校服", "appearance": [80, 40, 85, 50, 75, 50, 75, 70, 65, 35, 70, 35], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_2b3d4fd2-f019-4f6f-8286-47a1387a7a40.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_2b3d4fd2-f019-4f6f-8286-47a1387a7a40.jpg"}, {"id": "fuko", "name": "Clannad", "series": "星形,雕刻,天然", "tags": "伊吹风子，总是在走廊雕刻星形木雕的神秘少女，天然呆但十分可爱。她为了姐姐的婚礼而雕刻星形木雕送给大家，那份纯真的心意让人落泪。", "description": "棕色短发，抱着海星玩偶，穿校服", "appearance": [75, 65, 50, 85, 80, 40, 55, 45, 55, 60, 80, 60], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_312c6e00-e983-4b9c-a269-6b55f0a14400.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_312c6e00-e983-4b9c-a269-6b55f0a14400.jpg"}, {"id": "kotomi2", "name": "Clannad", "series": "姐姐,温柔,早苗", "tags": "古河早苗，渚的母亲，看起来年轻得像姐姐。她经营着古河面包店，虽然面包很难吃但性格温柔，是家庭的支柱。", "description": "蓝色短发，穿围裙，温柔的笑容", "appearance": [95, 70, 65, 60, 95, 20, 65, 85, 25, 70, 90, 75], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_b0644438-2b38-4140-8a86-728560a0bed2.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_b0644438-2b38-4140-8a86-728560a0bed2.jpg"}, {"id": "rei", "name": "新世纪福音战士", "series": "三无,蓝发,战斗服", "tags": "绫波丽，EVA零号机的驾驶员，被称为三无少女的代表。她几乎不表达情感，但那份沉默中蕴含着对存在的追问和对碇司令的复杂感情。", "description": "蓝色短发，红色眼瞳，穿白色战斗服", "appearance": [55, 40, 90, 20, 70, 15, 75, 60, 95, 30, 40, 25], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_b9816d80-ebdb-4039-bd9d-c3f717b3903c.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_b9816d80-ebdb-4039-bd9d-c3f717b3903c.jpg"}, {"id": "asuka", "name": "新世纪福音战士", "series": "傲娇,天才,红色", "tags": "明日香·兰格雷，EVA二号机的驾驶员，骄傲的天才少女。她用强势和攻击性来掩饰内心的脆弱和对认可的渴望，是傲娇角色的鼻祖之一。", "description": "橙红色长发，蓝色眼眸，穿红色战斗服", "appearance": [50, 90, 80, 60, 60, 95, 65, 70, 40, 90, 75, 65], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_2fc42670-96c7-44c7-b117-04dd72b47c67.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_2fc42670-96c7-44c7-b117-04dd72b47c67.jpg"}, {"id": "misato", "name": "新世纪福音战士", "series": "成熟,啤酒,战术", "tags": "葛城美里，NERV战术作战部长，表面是个爱喝啤酒的邋遢大姐姐，实则背负着沉重的过去。她是真嗣的监护人，也是他在战场上最可靠的支柱。", "description": "紫色短发，穿黑色夹克和红色裙，佩戴十字架项链", "appearance": [70, 75, 85, 55, 80, 45, 70, 90, 55, 80, 70, 75], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_3ec8e30e-ce24-4102-a303-c7fabd707484.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_3ec8e30e-ce24-4102-a303-c7fabd707484.jpg"}, {"id": "rem", "name": "Re:从零开始的异世界生活", "series": "女仆,蓝发,忠诚", "tags": "雷姆，罗兹瓦尔宅邸的女仆，蓝色短发的鬼族少女。她对姐姐拉姆有着绝对的忠诚，在认识昴后将自己的一切都奉献给了他。那份从憎恨到深爱的转变令人动容。", "description": "蓝色短发，女仆装，隐藏的鬼角", "appearance": [90, 70, 65, 45, 100, 55, 70, 75, 50, 75, 90, 55], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_e475bdf6-6e04-418c-8ec9-673c2571b460.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_e475bdf6-6e04-418c-8ec9-673c2571b460.jpg"}, {"id": "ram", "name": "Re:从零开始的异世界生活", "series": "女仆,粉发,毒舌", "tags": "拉姆，雷姆的姐姐，粉色短发的鬼族少女。虽然失去了角但依然以骄傲的姿态生活。她对罗兹瓦尔有着绝对的忠诚，毒舌下藏着对妹妹的深爱。", "description": "粉色短发，女仆装，眼神锐利", "appearance": [65, 60, 80, 50, 95, 80, 75, 78, 55, 60, 65, 50], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_64c59d55-e773-4118-ab9c-0d3f5104b8fd.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_64c59d55-e773-4118-ab9c-0d3f5104b8fd.jpg"}, {"id": "emilia", "name": "Re:从零开始的异世界生活", "series": "银发,精灵,王选", "tags": "爱蜜莉雅，银发紫瞳的半精灵少女，王选候选人之一。因为与嫉妒魔女相似的外貌而被人畏惧，但她依然保持善良。那句'你真的喜欢我吗'触动了无数人的心。", "description": "银色长发，紫色眼瞳，穿白色长裙", "appearance": [90, 60, 70, 45, 85, 40, 90, 72, 75, 55, 85, 60], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_2f45eecd-363c-4241-a651-ca21b3165ae2.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_2f45eecd-363c-4241-a651-ca21b3165ae2.jpg"}, {"id": "beatrice", "name": "Re:从零开始的异世界生活", "series": "萝莉,金发,图书馆", "tags": "碧翠丝，禁书图书馆的守护者，金色双马尾的精灵少女。她嘴上说着讨厌人类，实则内心孤独渴望陪伴。与昴签订契约后终于走出了图书馆。", "description": "金色双马尾，金色眼眸，穿红白洋装", "appearance": [60, 45, 85, 55, 80, 85, 80, 70, 85, 50, 70, 35], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_5e685bd0-5297-4f74-9211-9f33da49c008.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_5e685bd0-5297-4f74-9211-9f33da49c008.jpg"}, {"id": "echidna", "name": "Re:从零开始的异世界生活", "series": "魔女,好奇,茶会", "tags": "艾姬多娜，暴食魔女，对世界万物充满好奇的知性魔女。她以茶会的形式与昴交流，言辞优雅但内心冷酷理性，将一切视为实验对象。", "description": "白色长发，黑色长裙，绿色眼眸，手持茶杯", "appearance": [55, 50, 90, 45, 60, 50, 90, 88, 95, 65, 50, 55], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_c0d93c3c-4186-4b75-8a55-5baf2a7c1a3c.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_c0d93c3c-4186-4b75-8a55-5baf2a7c1a3c.jpg"}, {"id": "rem_alt", "name": "Re:从零开始的异世界生活", "series": "暴食,蓝发,暴走", "tags": "雷姆（暴食形态），被暴食大权吞噬了名字和记忆后的雷姆。她失去了自我，但那份潜意识的温柔依然存在，等待着被唤醒的那一天。", "description": "蓝色短发，空洞的眼神，穿睡裙", "appearance": [70, 30, 40, 20, 60, 10, 50, 45, 60, 20, 50, 30], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_5d7db206-220e-4ab7-a2e5-817df2f38aa4.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_5d7db206-220e-4ab7-a2e5-817df2f38aa4.jpg"}, {"id": "kurisu", "name": "命运石之门", "series": "天才,傲娇,红发", "tags": "牧濑红莉栖，17岁就从大学毕业的天才少女研究员。她与冈部之间跨越世界线的羁绊是整个故事的核心。'助手'这个称呼承载了无数的情感。", "description": "红棕色长发，蓝灰色眼眸，穿白衬衫和黑色短裤", "appearance": [70, 65, 90, 55, 80, 88, 80, 82, 65, 75, 70, 60], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/MiaoTu_683de9fa-b9a4-49af-9ee0-b6f297967a42.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/MiaoTu_683de9fa-b9a4-49af-9ee0-b6f297967a42.jpg"}, {"id": "mayuri", "name": "命运石之门", "series": "天然,温柔,星星", "tags": "椎名真由理，天真无邪的少女，口头禅是'嘟嘟噜'。她虽然不懂复杂的科学，但她的存在是冈部坚守的理由。那份纯真和温暖是穿越世界线的动力。", "description": "黑色长发，戴圆形帽子，穿蓝色连衣裙", "appearance": [95, 75, 40, 80, 85, 15, 60, 50, 30, 50, 90, 70], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_80e8a71d-352d-400f-9eea-31b8af706a39.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_80e8a71d-352d-400f-9eea-31b8af706a39.jpg"}, {"id": "kaori", "name": "四月是你的谎言", "series": "小提琴,金发,坚强", "tags": "宫园薰，自由奔放的小提琴手，用音乐改变了一个少年的世界。她在生命的最后时光里燃烧自己照亮他人，那份坚强和温柔让人心碎。", "description": "金发，蓝色眼眸，穿校服或白色连衣裙，持小提琴", "appearance": [90, 85, 70, 75, 85, 40, 85, 75, 50, 90, 95, 75], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_27c8152f-bb89-420a-b2f7-f6a5f2328449.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_27c8152f-bb89-420a-b2f7-f6a5f2328449.jpg"}, {"id": "taiga", "name": "龙与虎", "series": "掌中老虎,傲娇,双马尾", "tags": "逢坂大河，人称'掌中老虎'的傲娇少女。她虽然外表凶猛但内心十分脆弱，对家人的思念和对大河的依赖形成了鲜明的对比。", "description": "棕色长发双马尾，身材娇小，穿校服", "appearance": [65, 85, 60, 70, 85, 95, 55, 55, 30, 75, 80, 65], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/MiaoTu_d48238f1-114c-4c4f-a3c3-289824553556.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/MiaoTu_d48238f1-114c-4c4f-a3c3-289824553556.jpg"}, {"id": "senjougahara", "name": "物语系列", "series": "傲娇,文具,体重", "tags": "战场原黑仪，被称为'傲娇的完成形'的少女。她用尖锐的言辞保护自己，但内心其实十分温柔。'我知道了，战场原荡漾'这句台词成为了经典。", "description": "紫色长发，穿校服，手持文具", "appearance": [60, 60, 85, 50, 80, 95, 75, 78, 60, 70, 65, 55], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_5a3dcb84-8e76-4b85-9833-b54462a858fa.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_5a3dcb84-8e76-4b85-9833-b54462a858fa.jpg"}, {"id": "shinobu", "name": "物语系列", "series": "吸血鬼,金发,甜甜圈", "tags": "忍野忍，曾经的吸血鬼之王，如今以八岁少女的形态寄宿在阿良良木历的影子里。她嗜好甜甜圈，高傲但寂寞，与历之间有着超越时间的羁绊。", "description": "金色长发，黄色眼瞳，穿白色连衣裙和宽边帽", "appearance": [55, 60, 90, 50, 85, 60, 80, 85, 90, 50, 55, 35], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_99d34599-10e3-415c-bdf7-db8fea160263.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_99d34599-10e3-415c-bdf7-db8fea160263.jpg"}, {"id": "nadeko", "name": "物语系列", "series": "蛇,刘海,内向", "tags": "千石抚子，被刘海遮住眼睛的内向少女。她看似乖巧无害，但内心深处隐藏着扭曲的情感，蛇的意象贯穿了她的故事线。", "description": "棕色短发齐刘海，穿校服，帽子上有蛇图案", "appearance": [75, 45, 40, 55, 60, 30, 55, 45, 70, 35, 70, 40], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_1ca8dfb9-b7bc-4822-9331-222f5ae0b79c.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_1ca8dfb9-b7bc-4822-9331-222f5ae0b79c.jpg"}, {"id": "kaguya", "name": "辉夜大小姐想让我告白", "series": "傲娇,会长,天才", "tags": "四宫辉夜，四宫财阀的长女，秀知院学生会副会长。她与白银之间展开了一场'恋爱头脑战'，两个天才之间的拉锯战既搞笑又甜蜜。", "description": "黑色长发，红色丝带，穿秀知院校服", "appearance": [65, 60, 85, 55, 75, 90, 90, 78, 55, 60, 65, 55], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_1074a45d-1022-47dc-9772-56062e048afb.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_1074a45d-1022-47dc-9772-56062e048afb.jpg"}, {"id": "fujiwara", "name": "辉夜大小姐想让我告白", "series": "书记,游戏,吃货", "tags": "藤原千花，学生会书记，天真烂漫的气氛制造者。她总是打破辉夜和白银之间的气氛，但她的存在恰恰是这段关系不可或缺的润滑剂。", "description": "粉色长发，蓝色丝带，穿秀知院校服", "appearance": [80, 90, 50, 85, 75, 20, 60, 55, 25, 80, 85, 90], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_8c1be4a0-d236-41a9-8da1-7238eace7da2.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_8c1be4a0-d236-41a9-8da1-7238eace7da2.jpg"}, {"id": "hayasaka", "name": "辉夜大小姐想让我告白", "series": "女仆,变装,多面", "tags": "早坂爱，辉夜的女仆兼贴身随从。她擅长变装，可以在各种身份间自如切换。表面冷静专业，实则对辉夜有着深厚的感情。", "description": "银色短发，可以变装成各种造型", "appearance": [70, 70, 85, 60, 90, 55, 75, 80, 65, 75, 60, 65], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_713448e9-fbe2-49c0-be7f-8eebe2977594.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_713448e9-fbe2-49c0-be7f-8eebe2977594.jpg"}, {"id": "yukino", "name": "我的青春恋爱物语果然有问题", "series": "毒舌,猫,完美", "tags": "雪之下雪乃，完美无缺的冰山美人，侍奉部部长。她的毒舌和正直形成了独特的魅力，内心其实渴望被理解和陪伴。", "description": "黑色长发，蓝色眼眸，穿校服", "appearance": [60, 50, 95, 40, 80, 60, 90, 82, 55, 55, 60, 45], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/MiaoTu_fd4c83ef-71dd-4322-aee8-48e44ce9e3d3.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/MiaoTu_fd4c83ef-71dd-4322-aee8-48e44ce9e3d3.jpg"}, {"id": "yui", "name": "我的青春恋爱物语果然有问题", "series": "元气,团子,温柔", "tags": "由比滨结衣，活泼开朗的少女，侍奉部成员。她用自己的方式关心着周围的每个人，但在感情面前却显得犹豫不决。", "description": "粉色团子头，穿校服，温柔笑容", "appearance": [90, 85, 55, 80, 85, 25, 55, 55, 30, 75, 90, 85], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_68558f18-81e8-41ad-9755-dcca2dc64869.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_68558f18-81e8-41ad-9755-dcca2dc64869.jpg"}, {"id": "violet", "name": "紫罗兰永恒花园", "series": "机械,信,花", "tags": "薇尔莉特·伊芙加登，从战场走出的自动手记人偶，用信件传递人们的情感。她从不懂感情到逐渐理解'我爱你'的含义，成长之路令人泪目。", "description": "金色长发，蓝色眼眸，穿绿色外套和白色裙", "appearance": [75, 55, 85, 30, 90, 20, 90, 80, 65, 50, 60, 40], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_30fd8c75-2c11-4d1c-9b87-2f8f8ea5bd69.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_30fd8c75-2c11-4d1c-9b87-2f8f8ea5bd69.jpg"}, {"id": "zero_two", "name": "DARLING in the FRANXX", "series": "粉色,角,02", "tags": "Zero Two，代号002的精英 pistil，粉色长发头长角的神秘少女。她被称为'partner killer'，但与广的相遇改变了她的命运。' darling'这个称呼承载了全部的深情。", "description": "粉色长发，头上有红色小角，穿白色制服", "appearance": [65, 95, 80, 75, 85, 70, 70, 65, 75, 95, 85, 70], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_f36c269c-7aeb-4186-a548-d304604bd5cb.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_f36c269c-7aeb-4186-a548-d304604bd5cb.jpg"}, {"id": "maii", "name": "青春猪头少年不会梦到兔女郎学姐", "series": "学姐,兔女郎,科学", "tags": "樱岛麻衣，活跃于60年代的偶像出身的学姐。她遭遇了'青春期症候群'导致存在感消失，但凭借坚强的意志和咲太的陪伴克服了困境。", "description": "黑色长发，穿校服或兔女郎装", "appearance": [75, 75, 85, 65, 85, 75, 90, 80, 55, 80, 70, 65], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_1f62d219-4162-4394-b610-5561b66a448e.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_1f62d219-4162-4394-b610-5561b66a448e.jpg"}, {"id": "kitagawa", "name": "更衣人偶坠入爱河", "series": "辣妹,cosplay,直率", "tags": "喜多川海梦，外表是辣妹风格但内心纯粹的少女。她对cosplay充满热情，那份直率和热情感染了周围的人。", "description": "金发粉色挑染，蓝色眼眸，穿辣妹风格服装", "appearance": [80, 95, 60, 85, 75, 40, 60, 60, 30, 90, 85, 90], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_f6f3918b-8e56-4466-96f0-4f044ed2745c.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_f6f3918b-8e56-4466-96f0-4f044ed2745c.jpg"}, {"id": "kyouko", "name": "堀与宫村", "series": "辣妹,反差,温柔", "tags": "堀京子，外表光鲜亮丽但其实在家很朴素的反差少女。她对宫村的感情纯粹而直接，是那种一旦认定就全力以赴的类型。", "description": "棕色长发，穿校服，耳洞和耳环", "appearance": [85, 80, 65, 70, 90, 35, 70, 70, 30, 80, 80, 80], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_e3baf400-dcb2-4700-a2b7-438e9dce62d1.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_e3baf400-dcb2-4700-a2b7-438e9dce62d1.jpg"}, {"id": "yui", "name": "轻音少女", "series": "天然,吉他,蛋糕", "tags": "平泽唯，天然呆的吉他手，轻音部的灵魂人物。她虽然做事迷糊但对音乐和朋友的感情十分真挚。'蛋糕蛋糕蛋糕'的口头禅让人印象深刻。", "description": "棕色长发，戴发箍，穿校服或休闲装", "appearance": [85, 90, 40, 90, 80, 15, 50, 45, 25, 75, 85, 75], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_15291230-a4f2-45d6-917f-de98335c5a85.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_15291230-a4f2-45d6-917f-de98335c5a85.jpg"}, {"id": "mio", "name": "轻音少女", "series": "害羞,贝斯,左撇子", "tags": "秋山澪，轻音部的贝斯手，成绩优秀但容易害羞。她虽然性格内向但却是乐队中最可靠的存在，那首'毛笔~笔~笔'成为了经典。", "description": "黑色长发左扎，穿校服，左撇子持贝斯", "appearance": [85, 55, 75, 50, 90, 75, 85, 80, 45, 55, 75, 50], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_d4329a1e-684a-41c3-9fe0-da503852204a.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_d4329a1e-684a-41c3-9fe0-da503852204a.jpg"}, {"id": "madoka", "name": "魔法少女小圆", "series": "粉发,弓,牺牲", "tags": "鹿目圆香，温柔的粉发少女，最终成为了概念般的存在。她以自我牺牲的方式拯救了所有魔法少女，那份善良和勇气超越了时空。", "description": "粉色长发，粉色眼眸，穿魔法少女装持弓", "appearance": [95, 65, 50, 55, 90, 20, 70, 72, 70, 60, 90, 65], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_b463ef33-0a1e-44a7-ba2a-9b2f0a46b92d.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_b463ef33-0a1e-44a7-ba2a-9b2f0a46b92d.jpg"}, {"id": "homura", "name": "魔法少女小圆", "series": "黑发,盾,时间", "tags": "晓美焰，为了拯救小圆而不断重复时间的少女。她从软弱变得坚强，从天真变得冷酷，一切只为了守护那一个重要的人。", "description": "黑色长发，紫色眼眸，穿魔法少女装持盾", "appearance": [60, 55, 95, 35, 100, 50, 80, 88, 85, 70, 70, 40], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/MiaoTu_8bb046a3-300e-450a-be05-5f4f4815702a.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/MiaoTu_8bb046a3-300e-450a-be05-5f4f4815702a.jpg"}, {"id": "kanade", "name": "Angel Beats!", "series": "天使,钢琴,无表情", "tags": "立华奏，死后世界的'天使'，实际上是个温柔的少女。她用编程能力守护着死后的世界，'谢谢你给了我人生'这句话让无数人落泪。", "description": "银色长发，金色眼眸，穿校服", "appearance": [75, 45, 85, 30, 80, 15, 90, 78, 75, 40, 55, 35], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_6f210c9a-830a-485a-a093-6e09f96c9497.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_6f210c9a-830a-485a-a093-6e09f96c9497.jpg"}, {"id": "yurippe", "name": "Angel Beats!", "series": "领袖,枪,活泼", "tags": "仲村由理，死后世界反抗组织的领袖。她表面上活泼强势，但内心背负着失去妹妹的悲痛。那份在绝望中寻找希望的勇气令人动容。", "description": "紫色长发双马尾，穿校服，持枪", "appearance": [65, 90, 80, 65, 80, 60, 65, 65, 40, 90, 75, 75], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_74dd710e-de36-4200-98c6-5f629cf4815d.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_74dd710e-de36-4200-98c6-5f629cf4815d.jpg"}, {"id": "tohka", "name": "约会大作战", "series": "精灵,剑,饭量", "tags": "夜刀神十香，第一个被攻略的精灵，使用 Sandalphon（破城剑）。她天真直率，饭量惊人，对'士道'的信任和依赖纯粹而深厚。", "description": "紫色长发，紫色眼眸，穿紫色神灵装持大剑", "appearance": [80, 90, 55, 75, 85, 50, 65, 55, 50, 75, 80, 70], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_e7cba430-5344-401e-bf92-3f4fe698a940.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_e7cba430-5344-401e-bf92-3f4fe698a940.jpg"}, {"id": "kurumi", "name": "约会大作战", "series": "时间,时钟眼,哥特", "tags": "时崎狂三，最危险的精灵之一，拥有时间操控能力。她的左眼是金色时钟，行为亦正亦邪，是最具人气的角色之一。", "description": "黑色长发双马尾，异色瞳（左金时钟右红），穿红黑哥特装", "appearance": [55, 75, 85, 60, 50, 80, 85, 75, 95, 85, 65, 55], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_4dfba83a-ea8c-412b-90c3-a3e784323a1c.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_4dfba83a-ea8c-412b-90c3-a3e784323a1c.jpg"}, {"id": "kotori", "name": "约会大作战", "series": "发饰,司令,反差", "tags": "五河琴里，士道的义妹，拉塔托斯克的司令官。白色发带时是可爱妹妹，黑色发带时是冷酷司令，反差萌的代表性角色。", "description": "红色双马尾，红色眼眸，根据发带颜色切换性格", "appearance": [65, 85, 80, 60, 85, 75, 65, 70, 55, 80, 65, 65], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_5bee31a5-89fe-42df-8bb0-9d6f58fce702.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_5bee31a5-89fe-42df-8bb0-9d6f58fce702.jpg"}, {"id": "miku", "name": "五等分的新娘", "series": "三玖,耳机,战国", "tags": "中野三玖，五胞胎中的三女，戴耳机的内向少女。她喜欢战国武将，表面上沉默寡言但内心感情丰富。'三玖是我老婆'成为了流行语。", "description": "蓝色短发，戴耳机，穿校服", "appearance": [80, 45, 70, 50, 80, 55, 75, 60, 55, 45, 75, 40], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_f55117f4-6791-44e9-b3f0-bde00713cfa3.jpg", "image": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_f55117f4-6791-44e9-b3f0-bde00713cfa3.jpg"}, {"id": "nino", "name": "五等分的新娘", "series": "二乃,时尚,强势", "tags": "中野二乃，五胞胎中的二女，性格强势但厨艺出众。她最初抗拒风太郎但后来成为最积极追求者之一，反差极大。", "description": "黑色长发，戴蝴蝶结发饰，穿时尚服装", "appearance": [65, 85, 75, 70, 75, 85, 75, 65, 40, 85, 70, 75], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_00000048-0000-0000-0000-000000000000.jpg", "image": "http://bkimg.cdn.bcebos.com/pic/37d3d539b6003af346a509da352ac65c1038b669"}, {"id": "chizuru", "name": "租借女友", "series": "演员,完美,黑发", "tags": "水原千鹤，梦想成为女演员的大学生，兼职租借女友。她以完美的服务著称，但背后隐藏着对祖父的思念和对演技的热忱。", "description": "棕色短发，棕色眼眸，穿时尚服装", "appearance": [80, 70, 85, 50, 85, 45, 85, 82, 50, 70, 65, 65], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_00000049-0000-0000-0000-000000000000.jpg", "image": "http://bkimg.cdn.bcebos.com/pic/c83d70cf3bc79f3df8dcf7b538f7da11728b461083a2"}, {"id": "ai", "name": "我推的孩子", "series": "偶像,星星眼,谎言", "tags": "星野爱，天才偶像，拥有星星般的双眼。她一生都在寻找'爱'的定义，用谎言包裹真心。她的故事是整个作品的核心悲剧。", "description": "紫粉色长发，紫红异色星形瞳，穿偶像服装", "appearance": [75, 90, 65, 75, 70, 45, 85, 60, 70, 85, 80, 80], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_00000050-0000-0000-0000-000000000000.jpg", "image": "http://bkimg.cdn.bcebos.com/pic/b90e7bec54e736d1042ae9e79d504fc2d5626927"}, {"id": "yor", "name": "间谍过家家", "series": "杀手,刺客,温柔", "tags": "约尔·福杰，表面是普通公务员，实为代号'荆棘公主'的职业杀手。她与洛伊德假结婚后逐渐学会了家庭的温暖，杀人时冷酷但带娃时笨拙。", "description": "黑色长发，金色眼眸，穿红色刺客服或日常裙装", "appearance": [75, 80, 85, 55, 90, 40, 80, 78, 65, 60, 70, 55], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_00000051-0000-0000-0000-000000000000.jpg", "image": "http://bkimg.cdn.bcebos.com/pic/7c1ed21b0ef41bd5d3768c1b57da81cb39db3d33"}, {"id": "nezuko", "name": "鬼灭之刃", "series": "鬼,竹筒,妹", "tags": "灶门祢豆子，被鬼化的炭治郎之妹。她虽然变成了鬼但保留了人性，咬着竹筒的可爱形象深入人心。为了保护哥哥可以化身为强大的战斗鬼。", "description": "黑色长发末端渐变橙色，粉色眼眸，嘴里咬着竹筒，穿和服", "appearance": [85, 75, 60, 65, 95, 30, 70, 50, 60, 50, 80, 45], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_00000052-0000-0000-0000-000000000000.jpg", "image": "http://bkimg.cdn.bcebos.com/pic/6f061d950a7b02087bf466e0ff80e5d3572c11df6222"}, {"id": "asuna", "name": "刀剑神域", "series": "闪光,细剑,料理", "tags": "结城明日奈，SAO中的'闪光'，使用细剑的顶级玩家。她从被困游戏的恐惧中走出，与桐人成为了生死与共的伴侣。那份坚强和温柔并存。", "description": "橙棕色长发，蓝灰色眼眸，穿红白骑士装持细剑", "appearance": [85, 85, 80, 60, 90, 55, 85, 80, 45, 80, 75, 70], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_00000053-0000-0000-0000-000000000000.jpg", "image": "http://bkimg.cdn.bcebos.com/pic/a1ec08fa513d26977805340a5dfbb2fb4216d896"}, {"id": "ayu", "name": "Kanon", "series": "鲷鱼烧,元气,约定", "tags": "月宫亚由，充满活力的少女，喜欢鲷鱼烧和柚子的口头禅'呜咕'。她与祐一之间的约定跨越了七年的时光，是Kanon最感人的核心。", "description": "红棕色短发，戴红色发箍，穿校服和围巾", "appearance": [90, 90, 50, 85, 85, 35, 60, 55, 45, 80, 85, 75], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_00000054-0000-0000-0000-000000000000.jpg", "image": "http://bkimg.cdn.bcebos.com/pic/2f738bd4b31c8701b2417fbe2f7f9e2f0608fff7"}, {"id": "nayuki", "name": "Kanon", "series": "草莓,睡虫,表妹", "tags": "水濑名雪，祐一的表妹，嗜睡且喜欢草莓。她是田径部的王牌，但面对感情却显得迟钝而可爱。每天早上叫她起床是一场持久战。", "description": "蓝色短发，戴蓝色发箍，穿校服", "appearance": [85, 65, 60, 60, 85, 30, 65, 60, 35, 55, 75, 60], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_00000055-0000-0000-0000-000000000000.jpg", "image": "http://i2.hdslb.com/bfs/archive/d062e28c48ba1ce7641760458f6bcfc6ce5bff8a.jpg"}, {"id": "shiori", "name": "Kanon", "series": "体弱,等待,雪", "tags": "仓田汐里，体弱多病的少女，总是在雪中等待。她与姐姐之间有着复杂的感情纠葛，那份在寒冷中坚持的温柔让人心疼。", "description": "棕色短发，戴白色帽子，穿校服和围巾", "appearance": [90, 40, 55, 45, 80, 35, 70, 65, 55, 40, 80, 40], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_00000056-0000-0000-0000-000000000000.jpg", "image": "http://bkimg.cdn.bcebos.com/pic/18d8bc3eb13533fa492870f3a6d3fd1f40345b55"}, {"id": "makoto", "name": "Kanon", "series": "野性,记忆,狐", "tags": "美坂香里，实际身份是狐狸化身的少女。她失去了记忆但记得对祐一的感情，在恢复记忆的同时也面临消失的命运。", "description": "橙色短发，戴猫耳帽，穿休闲装", "appearance": [70, 85, 50, 80, 70, 45, 50, 40, 60, 70, 75, 65], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_00000057-0000-0000-0000-000000000000.jpg", "image": "http://bkimg.cdn.bcebos.com/pic/8644ebf81a4c510ffc49f16d6259252dd42aa533"}, {"id": "megumi", "name": "路人女主的养成方法", "series": "路人,帽子,游戏", "tags": "加藤惠，被安艺伦也发掘为'路人女主'的平凡少女。她存在感极低但性格沉稳，是社团中唯一能保持理性的人。平淡中见真情的角色。", "description": "棕色短发，戴贝雷帽，穿校服", "appearance": [70, 55, 80, 50, 80, 30, 65, 72, 45, 55, 60, 55], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_00000058-0000-0000-0000-000000000000.jpg", "image": "http://pic.rmb.bdstatic.com/bjh/events/61bb202dd0f32b685a5269e8b5322fe9389.jpeg@h_1280"}, {"id": "eriri", "name": "路人女主的养成方法", "series": "金发,画师,傲娇", "tags": "泽村·斯潘塞·英梨梨，混血大小姐兼同人画师。表面是完美大小姐，实则是宅文化画师。傲娇性格下隐藏着对伦也的深厚感情。", "description": "金色双马尾，蓝色眼眸，穿校服或画师装", "appearance": [65, 75, 75, 60, 75, 90, 80, 65, 40, 70, 70, 60], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_00000059-0000-0000-0000-000000000000.jpg", "image": "http://bkimg.cdn.bcebos.com/pic/77094b36acaf2edd0b18b3ad8d1001e93801938d"}, {"id": "utaha", "name": "路人女主的养成方法", "series": "黑丝,编剧,毒舌", "tags": "霞之丘诗羽，天才编剧，三年级学姐。她以毒舌和黑丝著称，对伦也的感情深沉而复杂，是成熟女性的魅力代表。", "description": "黑色长发，穿黑色过膝袜和校服", "appearance": [70, 55, 90, 50, 70, 65, 90, 88, 70, 65, 65, 50], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_00000060-0000-0000-0000-000000000000.jpg", "image": "http://bkimg.cdn.bcebos.com/pic/023b5bb5c9ea15cebe2a1d0abe003af33b87b2e9"}, {"id": "nao", "name": "Charlotte", "series": "摄像机,面包,坚强", "tags": "友利奈绪，星之海学园学生会会长。她用摄像机记录超能力者的证据，表面上冷酷但内心温柔。对哥哥的思念和对柚月的守护让人动容。", "description": "银白色短发，穿校服，手持摄像机", "appearance": [70, 80, 85, 55, 85, 60, 75, 78, 55, 85, 65, 60], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_00000061-0000-0000-0000-000000000000.jpg", "image": "http://bkimg.cdn.bcebos.com/pic/aa64034f78f0f736946dc5890a55b319eac413a2"}, {"id": "shouko", "name": "声之形", "series": "听障,温柔,坚强", "tags": "西宫硝子，有听觉障碍的少女，用手语交流。她尽管遭受霸凌但依然温柔待人，那份在痛苦中依然善良的坚强令人心碎。", "description": "粉色短发，戴助听器，穿校服", "appearance": [95, 45, 55, 40, 85, 20, 65, 65, 40, 40, 85, 45], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_00000062-0000-0000-0000-000000000000.jpg", "image": "http://i0.hdslb.com/bfs/archive/157a886c02507c769e125456d99a3600f3726aed.jpg"}, {"id": "kirino", "name": "俺妹", "series": "模特,宅,金牌", "tags": "高坂桐乃，外表是完美的小学生模特，实则是妹系galgame爱好者。她对兄长的感情复杂，既依赖又抗拒，是典型的傲娇角色。", "description": "棕色长发，蓝色眼眸，穿时尚服装", "appearance": [60, 90, 80, 65, 70, 85, 75, 65, 40, 85, 70, 75], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_00000063-0000-0000-0000-000000000000.jpg", "image": "http://img2.huashi6.com/images/resource/thumbnail/2025/03/10/10128_8857890721.jpg?imageMogr2/quality/100/interlace/1/thumbnail/2000x>"}, {"id": "kuroneko", "name": "俺妹", "series": "哥特,中二,黑猫", "tags": "五更琉璃（黑猫），哥特装中二病少女。她与桐乃是情敌也是朋友，表面毒舌但内心温柔，对游戏的认真和对朋友的珍惜形成反差。", "description": "黑色长发，蓝色眼眸，穿哥特萝莉装", "appearance": [65, 50, 85, 60, 80, 75, 85, 70, 75, 50, 60, 40], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_00000064-0000-0000-0000-000000000000.jpg", "image": "http://gd-hbimg.huaban.com/e3efb47c2f0035d5f4d8a3d44514b0925d1f061379d07-CEdRKv_fw658webp"}, {"id": "manami", "name": "俺妹", "series": "眼镜,青梅,温柔", "tags": "田村麻奈实，高坂家的青梅竹马，戴眼镜的朴素少女。她温柔贤惠，对桐乃的感情默默守护，是'青梅竹马败犬'的代表角色。", "description": "棕色短发，戴圆框眼镜，穿朴素服装", "appearance": [90, 50, 65, 40, 85, 15, 55, 72, 30, 45, 75, 60], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_00000065-0000-0000-0000-000000000000.jpg", "image": "http://bkimg.cdn.bcebos.com/pic/503d269759ee3d6d55fbaa00405b7a224f4a21a470e1"}, {"id": "saki", "name": "天才麻将少女", "series": "麻将,正负零,橘色", "tags": "宫永咲，天才麻将少女，拥有正负零的特殊能力。她表面平淡但实力惊人，为了与姐姐的约定而踏上全国大赛的舞台。", "description": "橘色短发，戴猫耳发饰，穿清澄高校校服", "appearance": [70, 55, 80, 50, 80, 35, 65, 60, 55, 55, 60, 50], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_00000066-0000-0000-0000-000000000000.jpg", "image": "http://i1.hdslb.com/bfs/archive/2fc1aabff47a6eb866911ba0fec591792aceaec8.jpg"}, {"id": "nodoka", "name": "天才麻将少女", "series": "企鹅,巨乳,数据", "tags": "原村和，数据派麻将选手，擅长理论分析。她的企鹅玩偶是标志性物品，与咲之间有着超越友情的深厚感情。", "description": "粉色短发，戴平光眼镜，穿校服", "appearance": [75, 60, 85, 45, 80, 45, 70, 72, 40, 60, 55, 55], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_00000067-0000-0000-0000-000000000000.jpg", "image": "http://bkimg.cdn.bcebos.com/pic/2fdda3cc7cd98d1001e9ccd24d72af0e7bec55e73a88"}, {"id": "nodoka2", "name": "天才麻将少女", "series": "龙门,洗牌,姐姐", "tags": "龙门渕透华，千里山的王牌。她拥有洗牌的特殊能力，是麻将界的明星选手。高傲但实力强大。", "description": "黑色长发，紫色眼眸，穿龙门渕校服", "appearance": [60, 70, 85, 55, 70, 75, 85, 78, 55, 75, 60, 65], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_00000068-0000-0000-0000-000000000000.jpg", "image": "http://bkimg.cdn.bcebos.com/pic/c75c10385343fbf21fcf259db07eca8064388fa9"}, {"id": "roxy", "name": "无职转生", "series": "魔神,蓝发,帽子", "tags": "洛琪西·米格路迪亚，鲁迪乌斯的魔法老师。她是鲁迪人生中最重要的三个人之一，沉着冷静但内心温柔，戴着宽边帽是标志。", "description": "蓝色短发，戴宽边帽，穿法师袍", "appearance": [80, 55, 92, 45, 85, 40, 85, 88, 80, 55, 60, 45], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_00000069-0000-0000-0000-000000000000.jpg", "image": "http://img2.huashi6.com/images/resource/2013/05/07/355378h78p0.jpg?imageView2/3/q/100/interlace/1/w/1600/h/1600"}, {"id": "sylphiette", "name": "无职转生", "series": "绿发,守护,菲", "tags": "希露菲叶特，鲁迪乌斯的青梅竹马。她有着绿色的头发和尖尖的耳朵，对鲁迪的感情纯粹而深沉。在鲁迪最脆弱的时候守护着他。", "description": "绿色短发，穿拉诺亚魔法大学校服", "appearance": [90, 50, 60, 50, 95, 30, 65, 62, 50, 50, 85, 55], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_00000070-0000-0000-0000-000000000000.jpg", "image": "http://bkimg.cdn.bcebos.com/pic/4ec2d5628535e5dd734d7a317cc6a7efcf1b62ff"}, {"id": "chino", "name": "请问您今天要来点兔子吗", "series": "萝莉,严肃,蓝发", "tags": "香风智乃，Rabbit House咖啡店的看板娘。她虽然年纪小但做事认真严肃，与天真的外表形成反差。爷爷是兔子提比。", "description": "蓝色短发，紫色眼眸，穿女仆装", "appearance": [75, 50, 70, 45, 80, 40, 70, 65, 55, 45, 60, 40], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_00000071-0000-0000-0000-000000000000.jpg", "image": "http://bkimg.cdn.bcebos.com/pic/3801213fb80e7beca068bd492f2eb9389a506bec"}, {"id": "cocoa", "name": "请问您今天要来点兔子吗", "series": "姐姐,元气,桃色", "tags": "保登心爱，充满活力的少女，来到Rabbit House打工。她自称有'姐姐力'但总是被智乃当作妹妹。她的活力感染着周围的每个人。", "description": "桃色长发，蓝色眼眸，穿女仆装", "appearance": [85, 95, 50, 85, 80, 25, 55, 50, 25, 85, 85, 90], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_00000072-0000-0000-0000-000000000000.jpg", "image": "http://bkimg.cdn.bcebos.com/pic/5f9e93b1a8856e1a08230241"}, {"id": "rise", "name": "请问您今天要来点兔子吗", "series": "变装,好胜,咖啡", "tags": "天天座理世，Rabbit House的女仆。她擅长变装和军事战术，性格好胜但其实很关心朋友。与心爱的互动充满了喜剧效果。", "description": "紫色长发双马尾，紫色眼眸，穿女仆装", "appearance": [65, 80, 80, 70, 75, 70, 70, 65, 55, 75, 60, 60], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_00000073-0000-0000-0000-000000000000.jpg", "image": ""}, {"id": "kotonoha", "name": "School Days", "series": "黑长直,优等生,悲剧", "tags": "桂言叶，黑长直的优等生少女。她性格内向但对感情十分执着，故事的走向让她成为了'nice boat'的代名词。外表温柔但内心有着惊人的执着。", "description": "黑色长发，紫色眼瞳，穿校服", "appearance": [80, 45, 60, 40, 75, 35, 85, 65, 60, 40, 75, 40], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_00000074-0000-0000-0000-000000000000.jpg", "image": ""}, {"id": "yozora", "name": "我的朋友很少", "series": "黑发,游戏,毒舌", "tags": "三日月夜空，邻人部的创立者。她表面上毒舌冷漠但内心渴望朋友，与星奈的关系亦敌亦友。在游戏中扮演男性角色是她的爱好。", "description": "黑色长发，蓝色眼眸，穿校服", "appearance": [60, 50, 90, 55, 70, 70, 75, 72, 60, 50, 55, 40], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_00000075-0000-0000-0000-000000000000.jpg", "image": ""}, {"id": "sena", "name": "我的朋友很少", "series": "金发,巨乳,游戏", "tags": "柏崎星奈，金发美少女，成绩优秀但缺乏朋友。她沉迷于galgame，将游戏女主角当作朋友。与夜空的互怼是邻人部的日常。", "description": "金色长发，蓝色眼眸，穿校服", "appearance": [65, 75, 65, 65, 70, 75, 80, 65, 40, 70, 70, 60], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_00000076-0000-0000-0000-000000000000.jpg", "image": ""}, {"id": "yuko", "name": "黄昏少女×失忆", "series": "幽灵,黑发,谜", "tags": "夕子，旧校舍的幽灵少女。她失去了生前的大部分记忆，与新谷贞一一起探寻自己的过去。黑色长发下隐藏着两个截然不同的人格。", "description": "黑色长发，穿旧式校服", "appearance": [80, 50, 65, 50, 75, 45, 85, 70, 90, 50, 75, 45], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_00000077-0000-0000-0000-000000000000.jpg", "image": ""}, {"id": "amnist", "name": "游魂", "series": "狐,神,温柔", "tags": "泉户真白，实际上是神狐的少女。她失去了力量后变得柔弱，但对主人公的依赖和感情十分真挚。那份超越种族的温柔让人动容。", "description": "白发，紫色眼瞳，穿白色连衣裙", "appearance": [90, 55, 50, 55, 85, 30, 80, 65, 75, 45, 80, 50], "traits": "https://miaoda-site-img.cdn.bcebos.com/images/baidu_image_search_00000078-0000-0000-0000-000000000000.jpg", "image": ""}];
+const QUESTIONS = [{"q": "当朋友难过时，你通常会怎么做？", "options": [{"text": "静静陪伴，听对方倾诉", "scores": {"gentle": 3, "mature": 1, "social": -1}}, {"text": "讲笑话或做鬼脸逗对方开心", "scores": {"energetic": 3, "playful": 2, "proactive": 1}}, {"text": "冷静分析问题并给出建议", "scores": {"independent": 2, "mature": 3, "mysterious": 1}}, {"text": "拉对方出去运动或吃美食散心", "scores": {"energetic": 2, "proactive": 3, "social": 2}}]}, {"q": "你更喜欢怎样的相处模式？", "options": [{"text": "温柔体贴，照顾对方的情绪", "scores": {"gentle": 3, "loyal": 1, "emotional": 2}}, {"text": "打打闹闹，像伙伴一样轻松", "scores": {"playful": 3, "energetic": 2, "social": 1}}, {"text": "各自独立，有事才联系", "scores": {"independent": 3, "mature": 2, "mysterious": 1}}, {"text": "时刻陪伴，保持紧密联系", "scores": {"loyal": 3, "proactive": 2, "emotional": 2}}]}, {"q": "看到路边受伤的小动物，你会？", "options": [{"text": "心疼地想带它去治疗", "scores": {"gentle": 3, "emotional": 2, "loyal": 1}}, {"text": "蹲下来逗它玩，让它开心", "scores": {"playful": 3, "energetic": 1, "social": 1}}, {"text": "观察一下，默默离开", "scores": {"independent": 2, "mysterious": 3, "mature": 1}}, {"text": "拍照分享到社交平台求助", "scores": {"social": 3, "proactive": 2, "energetic": 1}}]}, {"q": "你的理想周末是怎样度过的？", "options": [{"text": "宅在家里看书或打游戏", "scores": {"independent": 3, "mysterious": 1, "mature": 1}}, {"text": "出门运动、爬山或探索城市", "scores": {"energetic": 3, "proactive": 2, "playful": 1}}, {"text": "约朋友聚会、唱K、逛街", "scores": {"social": 3, "energetic": 1, "playful": 2}}, {"text": "学习新技能或充电提升", "scores": {"mature": 3, "independent": 2, "elegant": 1}}]}, {"q": "面对突如其来的表白，你的反应是？", "options": [{"text": "脸红心跳，不知所措", "scores": {"tsundere": 3, "emotional": 2, "gentle": 1}}, {"text": "直接回应，喜欢就接受不喜欢就拒绝", "scores": {"proactive": 3, "independent": 2, "mature": 1}}, {"text": "装作没听见或者岔开话题", "scores": {"tsundere": 2, "mysterious": 2, "playful": 1}}, {"text": "认真思考对方是否合适自己", "scores": {"mature": 3, "independent": 2, "elegant": 1}}]}, {"q": "你最向往的生活场景是？", "options": [{"text": "和爱人一起做饭、看夕阳", "scores": {"gentle": 3, "loyal": 2, "emotional": 2}}, {"text": "在世界各地冒险旅行", "scores": {"energetic": 3, "proactive": 2, "mysterious": 1}}, {"text": "安静的图书馆或咖啡馆一角", "scores": {"elegant": 3, "independent": 2, "mysterious": 2}}, {"text": "热闹的派对，和朋友一起嗨", "scores": {"social": 3, "energetic": 2, "playful": 2}}]}, {"q": "你认为自己的性格更偏向？", "options": [{"text": "温柔内敛，不爱争抢", "scores": {"gentle": 3, "elegant": 1, "mysterious": 1}}, {"text": "活泼外向，喜欢热闹", "scores": {"energetic": 3, "social": 2, "playful": 2}}, {"text": "理性冷静，独来独往", "scores": {"independent": 3, "mature": 2, "mysterious": 1}}, {"text": "古灵精怪，出其不意", "scores": {"playful": 3, "mysterious": 2, "proactive": 1}}]}, {"q": "当朋友遇到困难时，你会？", "options": [{"text": "第一时间赶到身边支持", "scores": {"loyal": 3, "gentle": 2, "proactive": 2}}, {"text": "帮忙想办法解决问题", "scores": {"independent": 2, "mature": 3, "proactive": 1}}, {"text": "用幽默化解紧张气氛", "scores": {"playful": 3, "social": 2, "energetic": 1}}, {"text": "默默关注，需要时才出手", "scores": {"mysterious": 3, "independent": 2, "tsundere": 1}}]}, {"q": "当你面对未知的挑战时，你的第一反应是？", "options": [{"text": "心跳加速，但暗暗期待", "scores": {"emotional": 2, "proactive": 2, "energetic": 1}}, {"text": "冷静评估风险后再决定", "scores": {"mature": 3, "independent": 2, "mysterious": 1}}, {"text": "不管三七二十一先冲再说", "scores": {"energetic": 3, "proactive": 3, "playful": 1}}, {"text": "感到一种说不清的兴奋和不安", "scores": {"mysterious": 3, "emotional": 2, "tsundere": 1}}]}, {"q": "你认为一段关系中最重要的是什么？", "options": [{"text": "彼此信任，无条件支持", "scores": {"loyal": 3, "gentle": 2, "emotional": 1}}, {"text": "保持个人空间和独立性", "scores": {"independent": 3, "mature": 2, "mysterious": 1}}, {"text": "每天都有新鲜感和惊喜", "scores": {"playful": 3, "proactive": 2, "energetic": 1}}, {"text": "心灵的深层共鸣和理解", "scores": {"emotional": 3, "mysterious": 2, "elegant": 1}}]}, {"q": "在一个雨天，你最想做什么？", "options": [{"text": "泡杯热茶，听雨声发呆", "scores": {"elegant": 3, "emotional": 2, "mysterious": 1}}, {"text": "冲进雨里淋个痛快", "scores": {"energetic": 3, "playful": 2, "proactive": 1}}, {"text": "给想念的人打个电话", "scores": {"emotional": 3, "social": 2, "loyal": 1}}, {"text": "窝在被窝里看恐怖小说", "scores": {"mysterious": 3, "independent": 2, "tsundere": 1}}]}, {"q": "如果你能拥有一个超能力，你会选择？", "options": [{"text": "读心术，看穿别人的想法", "scores": {"mysterious": 3, "emotional": 2, "tsundere": 1}}, {"text": "瞬间移动，想去哪就去哪", "scores": {"energetic": 3, "proactive": 2, "playful": 1}}, {"text": "时间暂停，让自己独处", "scores": {"independent": 3, "mysterious": 2, "mature": 1}}, {"text": "治愈之力，帮助所有受伤的人", "scores": {"gentle": 3, "loyal": 2, "emotional": 2}}]}, {"q": "你面对压力时通常如何应对？", "options": [{"text": "找朋友倾诉，寻求安慰", "scores": {"social": 3, "emotional": 2, "gentle": 1}}, {"text": "独自消化，静待好转", "scores": {"independent": 3, "mature": 2, "mysterious": 1}}, {"text": "疯狂运动或打游戏发泄", "scores": {"energetic": 3, "proactive": 2, "playful": 1}}, {"text": "分析压力源，制定解决计划", "scores": {"mature": 3, "independent": 2, "elegant": 1}}]}, {"q": "如果要送礼物给重要的人，你会选择？", "options": [{"text": "亲手制作的心意之作", "scores": {"gentle": 3, "emotional": 2, "loyal": 1}}, {"text": "对方一直想要的惊喜大礼", "scores": {"proactive": 3, "playful": 2, "social": 1}}, {"text": "一本有深度的书或唱片", "scores": {"elegant": 3, "mature": 2, "mysterious": 1}}, {"text": "一起去某个特别的地方", "scores": {"emotional": 2, "proactive": 2, "mysterious": 2}}]}, {"q": "你最向往的旅行目的地是？", "options": [{"text": "历史悠久的欧洲古城", "scores": {"elegant": 3, "mature": 2, "mysterious": 1}}, {"text": "热带海岛，阳光沙滩", "scores": {"energetic": 3, "social": 2, "playful": 1}}, {"text": "人迹罕至的极地或沙漠", "scores": {"mysterious": 3, "independent": 2, "mature": 1}}, {"text": "和朋友们一起的热闹主题乐园", "scores": {"social": 3, "playful": 2, "energetic": 1}}]}, {"q": "你认为自己的最大魅力在于？", "options": [{"text": "温暖治愈的笑容", "scores": {"gentle": 3, "emotional": 2, "social": 1}}, {"text": "独特神秘的气质", "scores": {"mysterious": 3, "elegant": 2, "independent": 1}}, {"text": "永不服输的冲劲", "scores": {"proactive": 3, "energetic": 2, "playful": 1}}, {"text": "什么场合都能聊得来的社交力", "scores": {"social": 3, "playful": 2, "mature": 1}}]}, {"q": "你最讨厌别人对你做什么？", "options": [{"text": "无视你的付出和感受", "scores": {"loyal": 3, "gentle": 2, "emotional": 1}}, {"text": "限制你的自由和选择", "scores": {"independent": 3, "proactive": 2, "energetic": 1}}, {"text": "对你撒谎和不信任", "scores": {"mature": 3, "mysterious": 2, "tsundere": 1}}, {"text": "在众人面前让你难堪", "scores": {"tsundere": 3, "elegant": 2, "social": 1}}]}, {"q": "深夜睡不着时，你通常会？", "options": [{"text": "回忆过去，想很多有的没的", "scores": {"emotional": 3, "mysterious": 2, "gentle": 1}}, {"text": "刷手机看视频打发时间", "scores": {"social": 2, "playful": 2, "energetic": 1}}, {"text": "思考人生，规划未来", "scores": {"mature": 3, "independent": 2, "elegant": 1}}, {"text": "起来做点事情，不想浪费时间", "scores": {"proactive": 3, "energetic": 2, "independent": 1}}]}, {"q": "你觉得理想的爱情是什么样的？", "options": [{"text": "细水长流，相濡以沫", "scores": {"gentle": 3, "loyal": 2, "mature": 1}}, {"text": "轰轰烈烈，刻骨铭心", "scores": {"emotional": 3, "proactive": 2, "energetic": 1}}, {"text": "心有灵犀，不言而喻", "scores": {"mysterious": 3, "elegant": 2, "emotional": 1}}, {"text": "互相成就，共同成长", "scores": {"independent": 3, "mature": 2, "proactive": 1}}]}, {"q": "你更欣赏哪种类型的角色？", "options": [{"text": "温柔善良，为他人着想", "scores": {"gentle": 3, "loyal": 2, "emotional": 1}}, {"text": "酷酷的，带着神秘感", "scores": {"mysterious": 3, "tsundere": 2, "elegant": 1}}, {"text": "开朗活泼，元气满满", "scores": {"energetic": 3, "social": 2, "playful": 1}}, {"text": "冷静理智，实力强大", "scores": {"mature": 3, "independent": 2, "mysterious": 1}}]}, {"q": "当你在人群中时，你通常？", "options": [{"text": "主动和周围人聊天", "scores": {"social": 3, "proactive": 2, "energetic": 1}}, {"text": "安静待在角落观察", "scores": {"mysterious": 3, "independent": 2, "mature": 1}}, {"text": "找熟人聊天，不主动搭话", "scores": {"tsundere": 2, "gentle": 2, "emotional": 1}}, {"text": "成为话题中心，活跃气氛", "scores": {"playful": 3, "social": 2, "proactive": 1}}]}, {"q": "你最怕失去什么？", "options": [{"text": "重要的人的信任", "scores": {"loyal": 3, "gentle": 2, "emotional": 1}}, {"text": "自由选择的权利", "scores": {"independent": 3, "proactive": 2, "energetic": 1}}, {"text": "内心深处的秘密", "scores": {"mysterious": 3, "tsundere": 2, "independent": 1}}, {"text": "和朋友们的关系", "scores": {"social": 3, "emotional": 2, "playful": 1}}]}, {"q": "你认为什么最能打动你？", "options": [{"text": "默默为你付出的小细节", "scores": {"gentle": 3, "emotional": 2, "loyal": 1}}, {"text": "出其不意的浪漫惊喜", "scores": {"playful": 3, "proactive": 2, "energetic": 1}}, {"text": "深层次的精神共鸣", "scores": {"mysterious": 3, "elegant": 2, "mature": 1}}, {"text": "在关键时刻的坚定守护", "scores": {"loyal": 3, "mature": 2, "tsundere": 1}}]}, {"q": "如果世界末日了，你最后想做什么？", "options": [{"text": "和最爱的人在一起度过", "scores": {"emotional": 3, "loyal": 2, "gentle": 1}}, {"text": "做自己一直想做但没做的事", "scores": {"proactive": 3, "energetic": 2, "playful": 1}}, {"text": "安静地看最后的风景", "scores": {"mysterious": 3, "elegant": 2, "independent": 1}}, {"text": "和所有朋友开个末日派对", "scores": {"social": 3, "playful": 2, "energetic": 1}}]}, {"q": "你对待承诺的态度是？", "options": [{"text": "一旦承诺就会用生命去守护", "scores": {"loyal": 3, "mature": 2, "gentle": 1}}, {"text": "视情况而定，灵活处理", "scores": {"playful": 2, "independent": 2, "proactive": 1}}, {"text": "不轻易承诺，但说到做到", "scores": {"mysterious": 2, "mature": 3, "tsundere": 1}}, {"text": "承诺是一种浪漫的表达", "scores": {"emotional": 3, "gentle": 2, "elegant": 1}}]}, {"q": "你的房间是什么风格？", "options": [{"text": "温馨整洁，充满生活气息", "scores": {"gentle": 3, "emotional": 2, "social": 1}}, {"text": "简约冷色，干净利落", "scores": {"mature": 3, "mysterious": 2, "independent": 1}}, {"text": "色彩缤纷，充满个性", "scores": {"playful": 3, "energetic": 2, "proactive": 1}}, {"text": "书籍满架，文艺气息", "scores": {"elegant": 3, "mysterious": 2, "mature": 1}}]}, {"q": "当你生气时，你的表现是？", "options": [{"text": "沉默不语，独自消化", "scores": {"mysterious": 3, "independent": 2, "mature": 1}}, {"text": "直接表达不满，当场解决", "scores": {"proactive": 3, "energetic": 2, "social": 1}}, {"text": "嘴上说没事，其实很在意", "scores": {"tsundere": 3, "emotional": 2, "loyal": 1}}, {"text": "用行动证明自己的态度", "scores": {"independent": 3, "mature": 2, "elegant": 1}}]}, {"q": "你最向往哪种超自然体验？", "options": [{"text": "和精灵对话，感受自然之力", "scores": {"mysterious": 3, "emotional": 2, "gentle": 1}}, {"text": "穿越时空，改变历史", "scores": {"proactive": 3, "mysterious": 2, "energetic": 1}}, {"text": "进入梦境，探索潜意识", "scores": {"mysterious": 3, "elegant": 2, "emotional": 1}}, {"text": "获得读心能力，看透人心", "scores": {"tsundere": 2, "mysterious": 3, "social": 1}}]}, {"q": "你觉得什么样的笑容最迷人？", "options": [{"text": "温暖如阳光的微笑", "scores": {"gentle": 3, "emotional": 2, "social": 1}}, {"text": "带着自信的爽朗大笑", "scores": {"energetic": 3, "proactive": 2, "playful": 1}}, {"text": "若隐若现的神秘微笑", "scores": {"mysterious": 3, "elegant": 2, "mature": 1}}, {"text": "害羞时偷笑的样子", "scores": {"tsundere": 3, "emotional": 2, "gentle": 1}}]}, {"q": "你最想拥有的技能是？", "options": [{"text": "烹饪出治愈人心的美食", "scores": {"gentle": 3, "social": 2, "emotional": 1}}, {"text": "战斗能力，保护重要的人", "scores": {"loyal": 3, "proactive": 2, "energetic": 1}}, {"text": "洞察一切的分析能力", "scores": {"mature": 3, "mysterious": 2, "independent": 1}}, {"text": "让任何人都开心的社交术", "scores": {"social": 3, "playful": 2, "proactive": 1}}]}, {"q": "你的手机里最多的APP是？", "options": [{"text": "社交软件，随时和朋友聊天", "scores": {"social": 3, "playful": 2, "energetic": 1}}, {"text": "阅读和学习类APP", "scores": {"mature": 3, "independent": 2, "elegant": 1}}, {"text": "游戏和娱乐类APP", "scores": {"playful": 3, "energetic": 2, "proactive": 1}}, {"text": "摄影和艺术类APP", "scores": {"emotional": 3, "mysterious": 2, "elegant": 1}}]}, {"q": "你认为最强的力量是？", "options": [{"text": "温柔，能融化一切", "scores": {"gentle": 3, "emotional": 2, "loyal": 1}}, {"text": "意志，永不放弃", "scores": {"loyal": 3, "proactive": 2, "mature": 1}}, {"text": "智慧，运筹帷幄", "scores": {"mature": 3, "mysterious": 2, "independent": 1}}, {"text": "勇气，直面恐惧", "scores": {"proactive": 3, "energetic": 2, "playful": 1}}]}, {"q": "你更喜欢哪个季节？", "options": [{"text": "春天，万物生长的季节", "scores": {"gentle": 3, "emotional": 2, "playful": 1}}, {"text": "夏天，充满活力的季节", "scores": {"energetic": 3, "social": 2, "proactive": 1}}, {"text": "秋天，沉静优雅的季节", "scores": {"elegant": 3, "mature": 2, "mysterious": 1}}, {"text": "冬天，安静神秘的季节", "scores": {"mysterious": 3, "independent": 2, "tsundere": 1}}]}, {"q": "你的口头禅类型是？", "options": [{"text": "鼓励和温暖的话", "scores": {"gentle": 3, "emotional": 2, "social": 1}}, {"text": "毒舌和吐槽", "scores": {"tsundere": 3, "playful": 2, "social": 1}}, {"text": "冷静的分析和判断", "scores": {"mature": 3, "independent": 2, "mysterious": 1}}, {"text": "神秘又意味深长的话", "scores": {"mysterious": 3, "elegant": 2, "emotional": 1}}]}, {"q": "你的理想职业是？", "options": [{"text": "教师或心理咨询师，帮助他人", "scores": {"gentle": 3, "emotional": 2, "social": 1}}, {"text": "探险家或运动员，挑战极限", "scores": {"energetic": 3, "proactive": 2, "playful": 1}}, {"text": "科学家或研究员，探索未知", "scores": {"mysterious": 3, "independent": 2, "mature": 1}}, {"text": "艺术家或设计师，创造美", "scores": {"elegant": 3, "emotional": 2, "mysterious": 1}}]}, {"q": "最后，你希望你的另一半具备什么品质？", "options": [{"text": "温柔体贴，永远在你身边", "scores": {"gentle": 3, "loyal": 2, "emotional": 1}}, {"text": "有趣好玩，每天都不一样", "scores": {"playful": 3, "energetic": 2, "proactive": 1}}, {"text": "成熟稳重，可以依靠", "scores": {"mature": 3, "independent": 2, "elegant": 1}}, {"text": "神秘迷人，永远猜不透", "scores": {"mysterious": 3, "tsundere": 2, "elegant": 1}}]}];
+const DIMENSIONS = [{"key": "gentle", "label": "温柔", "color": "#ff6b9d"}, {"key": "energetic", "label": "活力", "color": "#fbbf24"}, {"key": "independent", "label": "独立", "color": "#4ade80"}, {"key": "playful", "label": "俏皮", "color": "#f472b6"}, {"key": "loyal", "label": "忠诚", "color": "#60a5fa"}, {"key": "tsundere", "label": "傲娇", "color": "#f87171"}, {"key": "elegant", "label": "优雅", "color": "#a78bfa"}, {"key": "mature", "label": "成熟", "color": "#34d399"}, {"key": "mysterious", "label": "神秘", "color": "#818cf8"}, {"key": "proactive", "label": "主动", "color": "#fb923c"}, {"key": "emotional", "label": "感性", "color": "#e879f9"}, {"key": "social", "label": "社交", "color": "#22d3ee"}];
+
+// STATE
+let currentQ = 0;
+let answers = new Array(QUESTIONS.length).fill(null);
+
+// PARTICLES
+const canvas=document.getElementById('particles');
+const ctx=canvas.getContext('2d');
+let particles=[];
+function resizeCanvas(){canvas.width=window.innerWidth;canvas.height=window.innerHeight}
+resizeCanvas();
+window.addEventListener('resize',resizeCanvas);
+function initParticles(){
+particles=[];
+const count=Math.min(80,Math.floor(window.innerWidth/15));
+for(let i=0;i<count;i++){
+particles.push({
+x:Math.random()*canvas.width,y:Math.random()*canvas.height,
+r:Math.random()*2+0.5,sx:(Math.random()-0.5)*0.3,sy:(Math.random()-0.5)*0.3,
+a:Math.random()*0.5+0.1,c:Math.random()>0.5?'232,121,249':'168,85,247'
+});
+}
+}
+initParticles();
+function animateParticles(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+particles.forEach(p=>{
+p.x+=p.sx;p.y+=p.sy;
+if(p.x<0)p.x=canvas.width;if(p.x>canvas.width)p.x=0;
+if(p.y<0)p.y=canvas.height;if(p.y>canvas.height)p.y=0;
+ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+ctx.fillStyle='rgba('+p.c+','+p.a+')';ctx.fill();
+});
+requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+// NAVIGATION
+function showPage(id){
+document.querySelectorAll('.page').forEach(p=>{p.classList.remove('active','page-enter')});
+const page=document.getElementById(id);
+page.classList.add('active','page-enter');
+window.scrollTo(0,0);
+}
+function goHome(){showPage('page-home')}
+function goQuiz(){currentQ=0;answers.fill(null);showPage('page-quiz');renderQuestion()}
+function goGallery(){showPage('page-gallery');renderGallery()}
+function goResult(){showPage('page-result');renderResult()}
+
+// QUIZ
+function renderQuestion(){
+const q=QUESTIONS[currentQ];
+const letters=['A','B','C','D'];
+let html='<div class="quiz-question">'+(currentQ+1)+'. '+q.q+'</div><div class="quiz-options">';
+q.options.forEach((opt,i)=>{
+const sel=answers[currentQ]===i?'selected':'';
+html+='<button class="quiz-option '+sel+'" onclick="selectOption('+i+')"><div class="quiz-option-letter">'+letters[i]+'</div><span>'+opt.text+'</span></button>';
+});
+html+='</div>';
+document.getElementById('quizCard').innerHTML=html;
+document.getElementById('quizProgress').textContent='\u7b2c '+(currentQ+1)+' / '+QUESTIONS.length+' \u9898';
+document.getElementById('quizBar').style.width=((currentQ+1)/QUESTIONS.length*100)+'%';
+document.getElementById('btnPrev').style.visibility=currentQ===0?'hidden':'visible';
+document.getElementById('btnNext').textContent=currentQ===QUESTIONS.length-1?'\u63d0\u4ea4':'\u4e0b\u4e00\u9898';
+}
+function selectOption(i){answers[currentQ]=i;renderQuestion()}
+function prevQuestion(){if(currentQ>0){currentQ--;renderQuestion()}}
+function nextQuestion(){
+if(answers[currentQ]===null){alert('\u8bf7\u5148\u9009\u62e9\u4e00\u4e2a\u9009\u9879');return}
+if(currentQ<QUESTIONS.length-1){currentQ++;renderQuestion()}
+else{goResult()}
+}
+
+// MATCHING ALGORITHM
+function calculateUserVector(){
+const vec={};
+DIMENSIONS.forEach(d=>vec[d.key]=50);
+QUESTIONS.forEach((q,i)=>{
+const ans=answers[i];
+if(ans===null)return;
+const opt=q.options[ans];
+if(!opt.scores)return;
+for(const[key,val]of Object.entries(opt.scores)){
+if(vec[key]!==undefined){vec[key]+=val*8}
+}
+});
+DIMENSIONS.forEach(d=>{vec[d.key]=Math.max(0,Math.min(100,vec[d.key]))});
+return vec;
+}
+function cosineSimilarity(a,b){
+let dot=0,normA=0,normB=0;
+DIMENSIONS.forEach(d=>{
+const av=a[d.key],bv=b[d.key];
+dot+=av*bv;normA+=av*av;normB+=bv*bv;
+});
+return dot/(Math.sqrt(normA)*Math.sqrt(normB)||1);
+}
+function euclideanDistance(a,b){
+let sum=0;
+DIMENSIONS.forEach(d=>{
+const diff=a[d.key]-b[d.key];
+sum+=diff*diff;
+});
+return Math.sqrt(sum);
+}
+function maxEuclidean(){
+return Math.sqrt(DIMENSIONS.length)*100;
+}
+function matchCharacter(userVec,char){
+const charVec={};
+DIMENSIONS.forEach((d,i)=>{charVec[d.key]=char.traits[i]});
+const cos=cosineSimilarity(userVec,charVec);
+const euc=euclideanDistance(userVec,charVec);
+const normEuc=1-euc/maxEuclidean();
+const score=0.6*cos+0.4*normEuc;
+return Math.round(score*100);
+}
+function generateAnalysis(userVec,char){
+const topDims=[];
+const lowDims=[];
+DIMENSIONS.forEach((d,i)=>{
+const diff=Math.abs(userVec[d.key]-char.traits[i]);
+if(userVec[d.key]>70){topDims.push({label:d.label,key:d.key,userVal:userVec[d.key],charVal:char.traits[i]})}
+if(userVal<40&&char.traits[i]<40){lowDims.push(d.label)}
+});
+const topLabels=topDims.slice(0,3).map(d=>d.label).join('\u3001');
+let analysis='\u4f60\u7684\u6027\u683c\u5728\u300c'+topLabels+'\u300d\u7ef4\u5ea6\u4e0a\u8868\u73b0\u6700\u4e3a\u7a81\u51fa\uff0c\u800c'+char.name+'\u6b63\u662f\u4ee5\u8fd9\u4e9b\u7279\u8d28\u8457\u79f0\u7684\u89d2\u8272\u3002';
+analysis+=char.description;
+analysis+='\u4f60\u4eec\u7684\u6838\u5fc3\u6c14\u8d28\u9ad8\u5ea6\u5171\u9e23\uff0c\u5f7c\u6b64\u4e4b\u95f4\u7684\u5dee\u5f02\u6070\u597d\u5f62\u6210\u4e86\u4e92\u8865\u3002';
+if(topDims.length>0){
+analysis+='\u5728\u300c'+topDims[0].label+'\u300d\u4e0a\u4f60\u5f97\u5206'+topDims[0].userVal+'\uff0c\u5979\u540c\u6837\u62e5\u6709'+topDims[0].charVal+'\u7684\u9ad8\u5206\uff0c\u8fd9\u610f\u5473\u7740\u4f60\u4eec\u80fd\u591f\u6df1\u5c42\u6b21\u5730\u7406\u89e3\u5f7c\u6b64\u7684\u5185\u5fc3\u4e16\u754c\u3002';
+}
+analysis+='\u4eff\u4f5b\u5979\u5c31\u662f\u4e3a\u4e86\u4e0e\u4f60\u76f8\u9047\u800c\u5b58\u5728\u7684\u3002';
+return analysis;
+}
+function generateUserProfile(userVec){
+const sorted=DIMENSIONS.map((d,i)=>({label:d.label,key:d.key,val:userVec[d.key],color:d.color})).sort((a,b)=>b.val-a.val);
+let profile='\u4f60\u7684\u6027\u683c\u753b\u50cf\u5448\u73b0\u51fa\u4ee5\u300c'+sorted[0].label+'\u3001'+sorted[1].label+'\u3001'+sorted[2].label+'\u300d\u4e3a\u4e3b\u5bfc\u7684\u7279\u8d28\u3002';
+if(sorted[0].val>80){profile+='\u4f60\u5728\u300c'+sorted[0].label+'\u300d\u7ef4\u5ea6\u4e0a\u8868\u73b0\u6781\u4e3a\u7a81\u51fa\uff0c\u8fd9\u662f\u4f60\u6700\u6838\u5fc3\u7684\u4eba\u683c\u9b45\u529b\u6240\u5728\u3002'}
+if(sorted[sorted.length-1].val<40){profile+='\u76f8\u5bf9\u5730\uff0c\u300c'+sorted[sorted.length-1].label+'\u300d\u662f\u4f60\u8f83\u4e3a\u5f31\u7684\u7ef4\u5ea6\uff0c\u4f46\u8fd9\u4e5f\u6b63\u662f\u4f60\u72ec\u7279\u7684\u4e00\u9762\u3002'}
+return profile;
+}
+
+// RESULT
+function renderResult(){
+const userVec=calculateUserVector();
+const scored=CHARACTERS.map(c=>({...c,matchScore:matchCharacter(userVec,c)}));
+scored.sort((a,b)=>b.matchScore-a.matchScore);
+const best=scored[0];
+const top5=scored.slice(0,5);
+const tags=best.tags.split(',');
+const analysis=generateAnalysis(userVec,best);
+const profile=generateUserProfile(userVec);
+
+let html='<div class="result-card">';
+html+='<div class="result-image-wrap"><img src="'+best.image+'" alt="'+best.name+'" onerror="this.src=\'data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'400\'><rect width=\'100%25\' height=\'100%25\' fill=\'%2315131f\'/><text x=\'50%25\' y=\'50%25\' fill=\'%23e879f9\' text-anchor=\'middle\' dy=\'.3em\' font-size=\'20\'>' + best.name + '</text></svg>\'" loading="lazy"></div>';
+html+='<div class="result-info">';
+html+='<div class="result-series">'+best.series+'</div>';
+html+='<h2 class="result-name">'+best.name+'</h2>';
+html+='<div class="result-match">\u5951\u5408\u5ea6 '+best.matchScore+'%</div>';
+html+='<div class="result-tags">';
+tags.forEach(t=>{html+='<span class="result-tag">'+t+'</span>'});
+html+='</div>';
+html+='<p class="result-desc">'+best.appearance+'</p>';
+html+='</div></div>';
+
+// Analysis
+html+='<div class="result-analysis"><h3>\u4e3a\u4ec0\u4e48\u662f\u5979\uff1f</h3><p>'+analysis+'</p></div>';
+
+// User profile
+html+='<div class="result-analysis"><h3>\u4f60\u7684\u6027\u683c\u753b\u50cf</h3><p>'+profile+'</p></div>';
+
+// Radar chart
+html+='<div class="radar-chart-wrap"><canvas id="radarChart" width="400" height="400"></canvas></div>';
+
+// Top 5
+html+='<div class="result-recommendations"><h3>\u5176\u4ed6\u63a8\u8350\u89d2\u8272</h3><div class="rec-grid">';
+top5.slice(1).forEach(c=>{
+html+='<div class="rec-card" onclick="showCharDetail(\''+c.id+'\')">';
+html+='<div class="rec-image-wrap"><img src="'+c.image+'" alt="'+c.name+'" onerror="this.style.display=\'none\'" loading="lazy"></div>';
+html+='<div class="rec-info"><div class="rec-name">'+c.name+'</div><div class="rec-match">'+c.matchScore+'%</div></div>';
+html+='</div>';
+});
+html+='</div></div>';
+
+document.getElementById('resultContent').innerHTML=html;
+
+// Draw radar chart
+drawRadarChart(userVec,best);
+}
+
+// RADAR CHART
+function drawRadarChart(userVec,char){
+const canvas=document.getElementById('radarChart');
+if(!canvas)return;
+const ctx=canvas.getContext('2d');
+const cx=200,cy=200,radius=150;
+const n=DIMENSIONS.length;
+const angleStep=(Math.PI*2)/n;
+
+ctx.clearRect(0,0,400,400);
+
+// Draw grid
+for(let level=1;level<=4;level++){
+ctx.beginPath();
+for(let i=0;i<=n;i++){
+const angle=i*angleStep-Math.PI/2;
+const r=radius*(level/4);
+const x=cx+Math.cos(angle)*r;
+const y=cy+Math.sin(angle)*r;
+if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+}
+ctx.strokeStyle='rgba(232,121,249,'+(0.1+level*0.05)+')';
+ctx.lineWidth=1;
+ctx.stroke();
+}
+
+// Draw axes and labels
+DIMENSIONS.forEach((d,i)=>{
+const angle=i*angleStep-Math.PI/2;
+const x=cx+Math.cos(angle)*(radius+20);
+const y=cy+Math.sin(angle)*(radius+20);
+ctx.fillStyle='#9ca3af';
+ctx.font='12px Noto Sans SC';
+ctx.textAlign='center';
+ctx.textBaseline='middle';
+ctx.fillText(d.label,x,y);
+});
+
+// Draw character polygon
+ctx.beginPath();
+DIMENSIONS.forEach((d,i)=>{
+const angle=i*angleStep-Math.PI/2;
+const val=char.traits[i]/100;
+const r=radius*val;
+const x=cx+Math.cos(angle)*r;
+const y=cy+Math.sin(angle)*r;
+if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+});
+ctx.closePath();
+ctx.fillStyle='rgba(168,85,247,0.15)';
+ctx.strokeStyle='rgba(168,85,247,0.8)';
+ctx.lineWidth=2;
+ctx.fill();
+ctx.stroke();
+
+// Draw user polygon
+ctx.beginPath();
+DIMENSIONS.forEach((d,i)=>{
+const angle=i*angleStep-Math.PI/2;
+const val=userVec[d.key]/100;
+const r=radius*val;
+const x=cx+Math.cos(angle)*r;
+const y=cy+Math.sin(angle)*r;
+if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+});
+ctx.closePath();
+ctx.fillStyle='rgba(232,121,249,0.15)';
+ctx.strokeStyle='rgba(232,121,249,0.8)';
+ctx.lineWidth=2;
+ctx.fill();
+ctx.stroke();
+
+// Legend
+ctx.fillStyle='rgba(232,121,249,0.8)';
+ctx.fillRect(20,370,12,12);
+ctx.fillStyle='#f8f7fc';
+ctx.font='12px Noto Sans SC';
+ctx.textAlign='left';
+ctx.fillText('\u4f60\u7684\u6027\u683c',40,378);
+ctx.fillStyle='rgba(168,85,247,0.8)';
+ctx.fillRect(120,370,12,12);
+ctx.fillStyle='#f8f7fc';
+ctx.fillText(char.name,140,378);
+}
+
+// GALLERY
+function renderGallery(){
+let html='';
+CHARACTERS.forEach(c=>{
+html+='<div class="gallery-card" onclick="showCharDetail(\''+c.id+'\')">';
+html+='<div class="gallery-image-wrap"><img src="'+c.image+'" alt="'+c.name+'" onerror="this.style.display=\'none\'" loading="lazy"></div>';
+html+='<div class="gallery-info"><div class="gallery-name">'+c.name+'</div><div class="gallery-series">'+c.series+'</div></div>';
+html+='</div>';
+});
+document.getElementById('galleryGrid').innerHTML=html;
+}
+
+// MODAL
+function showCharDetail(id){
+const c=CHARACTERS.find(x=>x.id===id);
+if(!c)return;
+const tags=c.tags.split(',');
+let html='<div class="modal-image-wrap"><img src="'+c.image+'" alt="'+c.name+'" onerror="this.style.display=\'none\'" loading="lazy"></div>';
+html+='<div class="modal-body">';
+html+='<div style="font-size:13px;color:var(--pink);margin-bottom:4px">'+c.series+'</div>';
+html+='<h2 style="font-size:24px;margin-bottom:8px">'+c.name+'</h2>';
+html+='<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">';
+tags.forEach(t=>{html+='<span class="result-tag">'+t+'</span>'});
+html+='</div>';
+html+='<p style="color:var(--dim);font-size:14px;line-height:1.8;margin-bottom:12px">'+c.appearance+'</p>';
+html+='<p style="font-size:14px;line-height:1.8">'+c.description+'</p>';
+html+='<h3 style="font-size:14px;margin:16px 0 8px;color:var(--pink)">\u6027\u683c\u7ef4\u5ea6</h3>';
+html+='<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">';
+DIMENSIONS.forEach((d,i)=>{
+const val=c.traits[i];
+html+='<div style="text-align:center"><div style="font-size:12px;color:var(--dim)">'+d.label+'</div><div style="font-size:18px;font-weight:700;color:'+(val>70?'var(--pink)':val>40?'var(--text)':'var(--dim)')+'">'+val+'</div></div>';
+});
+html+='</div>';
+html+='</div>';
+document.getElementById('modalContent').innerHTML=html;
+document.getElementById('modal').classList.add('active');
+}
+function closeModal(e){
+if(e&&e.target!==document.getElementById('modal'))return;
+document.getElementById('modal').classList.remove('active');
+}
+
+// INIT
+goHome();
+</script>
+</body>
+</html>
