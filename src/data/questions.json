@@ -1,0 +1,1370 @@
+[
+ {
+  "q": "当朋友难过时，你通常会怎么做？",
+  "emoji": "😢",
+  "o": [
+   {
+    "t": "静静陪伴，听对方倾诉，递上一杯热饮",
+    "s": {
+     "gentle": 3,
+     "mature": 1,
+     "social": -1
+    }
+   },
+   {
+    "t": "讲笑话或做鬼脸逗对方开心，活跃气氛",
+    "s": {
+     "energetic": 3,
+     "playful": 2,
+     "proactive": 1
+    }
+   },
+   {
+    "t": "冷静分析问题并给出务实的建议",
+    "s": {
+     "independent": 2,
+     "mature": 3,
+     "mysterious": 1
+    }
+   },
+   {
+    "t": "拉对方出去运动或吃美食散心",
+    "s": {
+     "energetic": 2,
+     "proactive": 3,
+     "social": 2
+    }
+   }
+  ]
+ },
+ {
+  "q": "你更喜欢怎样的相处模式？",
+  "emoji": "💕",
+  "o": [
+   {
+    "t": "温柔体贴，照顾对方的每一个情绪变化",
+    "s": {
+     "gentle": 3,
+     "loyal": 1,
+     "emotional": 2
+    }
+   },
+   {
+    "t": "打打闹闹，像伙伴一样轻松无压力",
+    "s": {
+     "playful": 3,
+     "energetic": 2,
+     "social": 1
+    }
+   },
+   {
+    "t": "各自独立，有事才联系，互不干涉",
+    "s": {
+     "independent": 3,
+     "mature": 2,
+     "mysterious": 1
+    }
+   },
+   {
+    "t": "时刻陪伴，保持紧密联系，彼此依赖",
+    "s": {
+     "loyal": 3,
+     "proactive": 2,
+     "emotional": 2
+    }
+   }
+  ]
+ },
+ {
+  "q": "看到路边受伤的小动物，你会？",
+  "emoji": "🐾",
+  "o": [
+   {
+    "t": "心疼地想带它去治疗，悉心照料",
+    "s": {
+     "gentle": 3,
+     "emotional": 2,
+     "loyal": 1
+    }
+   },
+   {
+    "t": "蹲下来逗它玩，让它忘掉痛苦",
+    "s": {
+     "playful": 3,
+     "energetic": 1,
+     "social": 1
+    }
+   },
+   {
+    "t": "观察一下情况，默默离开",
+    "s": {
+     "independent": 2,
+     "mysterious": 2,
+     "mature": 1
+    }
+   },
+   {
+    "t": "拍照分享到社交平台求助",
+    "s": {
+     "social": 3,
+     "proactive": 2,
+     "energetic": 1
+    }
+   }
+  ]
+ },
+ {
+  "q": "你的理想周末是怎样度过的？",
+  "emoji": "🌤️",
+  "o": [
+   {
+    "t": "宅在家里看书或打游戏，享受独处",
+    "s": {
+     "independent": 3,
+     "mysterious": 1,
+     "mature": 1
+    }
+   },
+   {
+    "t": "出门运动、爬山或探索城市",
+    "s": {
+     "energetic": 3,
+     "proactive": 2,
+     "playful": 1
+    }
+   },
+   {
+    "t": "约朋友聚会、唱K、逛街",
+    "s": {
+     "social": 3,
+     "energetic": 1,
+     "playful": 2
+    }
+   },
+   {
+    "t": "学习新技能或充电提升自己",
+    "s": {
+     "mature": 3,
+     "independent": 2,
+     "elegant": 1
+    }
+   }
+  ]
+ },
+ {
+  "q": "面对突如其来的表白，你的反应是？",
+  "emoji": "💌",
+  "o": [
+   {
+    "t": "脸红心跳，不知所措，支支吾吾",
+    "s": {
+     "tsundere": 3,
+     "emotional": 2,
+     "gentle": 1
+    }
+   },
+   {
+    "t": "直接回应，喜欢就接受不喜欢就拒绝",
+    "s": {
+     "proactive": 3,
+     "independent": 2,
+     "mature": 1
+    }
+   },
+   {
+    "t": "装作没听见或者岔开话题",
+    "s": {
+     "tsundere": 2,
+     "mysterious": 2,
+     "playful": 1
+    }
+   },
+   {
+    "t": "认真思考对方是否合适自己",
+    "s": {
+     "mature": 3,
+     "independent": 2,
+     "elegant": 1
+    }
+   }
+  ]
+ },
+ {
+  "q": "你最向往的生活场景是？",
+  "emoji": "🏡",
+  "o": [
+   {
+    "t": "和爱人一起做饭、看夕阳，岁月静好",
+    "s": {
+     "gentle": 3,
+     "loyal": 2,
+     "emotional": 2
+    }
+   },
+   {
+    "t": "在世界各地冒险旅行，体验不同人生",
+    "s": {
+     "energetic": 3,
+     "proactive": 2,
+     "mysterious": 1
+    }
+   },
+   {
+    "t": "安静的图书馆或咖啡馆一角，沉浸书海",
+    "s": {
+     "elegant": 3,
+     "independent": 2,
+     "mysterious": 2
+    }
+   },
+   {
+    "t": "热闹的派对，和朋友一起嗨到天亮",
+    "s": {
+     "social": 3,
+     "energetic": 2,
+     "playful": 2
+    }
+   }
+  ]
+ },
+ {
+  "q": "你认为自己的性格更偏向？",
+  "emoji": "🪞",
+  "o": [
+   {
+    "t": "温柔内敛，不爱争抢，默默付出",
+    "s": {
+     "gentle": 3,
+     "elegant": 1,
+     "mysterious": 1
+    }
+   },
+   {
+    "t": "活泼外向，喜欢热闹，充满元气",
+    "s": {
+     "energetic": 3,
+     "social": 2,
+     "playful": 2
+    }
+   },
+   {
+    "t": "理性冷静，独来独往，不依赖他人",
+    "s": {
+     "independent": 3,
+     "mature": 2,
+     "mysterious": 1
+    }
+   },
+   {
+    "t": "古灵精怪，出其不意，让人猜不透",
+    "s": {
+     "playful": 3,
+     "mysterious": 2,
+     "proactive": 1
+    }
+   }
+  ]
+ },
+ {
+  "q": "当朋友遇到困难时，你会？",
+  "emoji": "🤝",
+  "o": [
+   {
+    "t": "第一时间赶到身边，默默支持",
+    "s": {
+     "loyal": 3,
+     "gentle": 2,
+     "proactive": 2
+    }
+   },
+   {
+    "t": "帮忙想办法解决问题，提供方案",
+    "s": {
+     "independent": 2,
+     "mature": 3,
+     "proactive": 1
+    }
+   },
+   {
+    "t": "用幽默化解紧张气氛，让对方放松",
+    "s": {
+     "playful": 3,
+     "social": 2,
+     "energetic": 1
+    }
+   },
+   {
+    "t": "默默关注，需要时才出手相助",
+    "s": {
+     "mysterious": 2,
+     "independent": 2,
+     "tsundere": 1
+    }
+   }
+  ]
+ },
+ {
+  "q": "当你面对未知的挑战时，你的第一反应是？",
+  "emoji": "🏔️",
+  "o": [
+   {
+    "t": "心跳加速，但暗暗期待，充满好奇",
+    "s": {
+     "emotional": 2,
+     "proactive": 2,
+     "energetic": 1
+    }
+   },
+   {
+    "t": "冷静评估风险后再做决定",
+    "s": {
+     "mature": 3,
+     "independent": 2,
+     "mysterious": 1
+    }
+   },
+   {
+    "t": "不管三七二十一先冲再说",
+    "s": {
+     "energetic": 3,
+     "proactive": 3,
+     "playful": 1
+    }
+   },
+   {
+    "t": "感到一种说不清的兴奋和不安交织",
+    "s": {
+     "mysterious": 2,
+     "emotional": 2,
+     "tsundere": 1
+    }
+   }
+  ]
+ },
+ {
+  "q": "你认为一段关系中最重要的是什么？",
+  "emoji": "💎",
+  "o": [
+   {
+    "t": "彼此信任，无条件支持对方",
+    "s": {
+     "loyal": 3,
+     "gentle": 2,
+     "emotional": 1
+    }
+   },
+   {
+    "t": "保持个人空间和独立性",
+    "s": {
+     "independent": 3,
+     "mature": 2,
+     "mysterious": 1
+    }
+   },
+   {
+    "t": "每天都有新鲜感和惊喜",
+    "s": {
+     "playful": 3,
+     "proactive": 2,
+     "energetic": 1
+    }
+   },
+   {
+    "t": "心灵的深层共鸣和互相理解",
+    "s": {
+     "emotional": 3,
+     "mysterious": 2,
+     "elegant": 1
+    }
+   }
+  ]
+ },
+ {
+  "q": "在一个雨天，你最想做什么？",
+  "emoji": "🌧️",
+  "o": [
+   {
+    "t": "泡杯热茶，听雨声发呆，放空思绪",
+    "s": {
+     "elegant": 3,
+     "emotional": 2,
+     "mysterious": 1
+    }
+   },
+   {
+    "t": "冲进雨里淋个痛快，感受自由",
+    "s": {
+     "energetic": 3,
+     "playful": 2,
+     "proactive": 1
+    }
+   },
+   {
+    "t": "给想念的人打个电话聊聊天",
+    "s": {
+     "emotional": 3,
+     "social": 2,
+     "loyal": 1
+    }
+   },
+   {
+    "t": "窝在被窝里看恐怖小说或悬疑剧",
+    "s": {
+     "mysterious": 2,
+     "independent": 2,
+     "tsundere": 1
+    }
+   }
+  ]
+ },
+ {
+  "q": "如果你能拥有一个超能力，你会选择？",
+  "emoji": "🔮",
+  "o": [
+   {
+    "t": "读心术，看穿别人的真实想法",
+    "s": {
+     "mysterious": 3,
+     "emotional": 2,
+     "tsundere": 1
+    }
+   },
+   {
+    "t": "瞬间移动，想去哪就去哪",
+    "s": {
+     "energetic": 3,
+     "proactive": 2,
+     "playful": 1
+    }
+   },
+   {
+    "t": "时间暂停，让自己独享安静",
+    "s": {
+     "independent": 3,
+     "mysterious": 2,
+     "mature": 1
+    }
+   },
+   {
+    "t": "治愈之力，帮助所有受伤的人",
+    "s": {
+     "gentle": 3,
+     "loyal": 2,
+     "emotional": 2
+    }
+   }
+  ]
+ },
+ {
+  "q": "你面对压力时通常如何应对？",
+  "emoji": "💪",
+  "o": [
+   {
+    "t": "找朋友倾诉，寻求安慰和支持",
+    "s": {
+     "social": 3,
+     "emotional": 2,
+     "gentle": 1
+    }
+   },
+   {
+    "t": "独自消化，静待好转",
+    "s": {
+     "independent": 3,
+     "mature": 2,
+     "mysterious": 1
+    }
+   },
+   {
+    "t": "疯狂运动或打游戏发泄精力",
+    "s": {
+     "energetic": 3,
+     "proactive": 2,
+     "playful": 1
+    }
+   },
+   {
+    "t": "分析压力源，制定解决计划",
+    "s": {
+     "mature": 3,
+     "independent": 2,
+     "elegant": 1
+    }
+   }
+  ]
+ },
+ {
+  "q": "如果要送礼物给重要的人，你会选择？",
+  "emoji": "🎁",
+  "o": [
+   {
+    "t": "亲手制作的心意之作，独一无二",
+    "s": {
+     "gentle": 3,
+     "emotional": 2,
+     "loyal": 1
+    }
+   },
+   {
+    "t": "对方一直想要的惊喜大礼",
+    "s": {
+     "proactive": 3,
+     "playful": 2,
+     "social": 1
+    }
+   },
+   {
+    "t": "一本有深度的书或一张珍贵唱片",
+    "s": {
+     "elegant": 3,
+     "mature": 2,
+     "mysterious": 1
+    }
+   },
+   {
+    "t": "一起去某个特别的地方体验",
+    "s": {
+     "emotional": 2,
+     "proactive": 2,
+     "mysterious": 2
+    }
+   }
+  ]
+ },
+ {
+  "q": "你最向往的旅行目的地是？",
+  "emoji": "✈️",
+  "o": [
+   {
+    "t": "历史悠久的欧洲古城，品味文化",
+    "s": {
+     "elegant": 3,
+     "mature": 2,
+     "mysterious": 1
+    }
+   },
+   {
+    "t": "热带海岛，阳光沙滩比基尼",
+    "s": {
+     "energetic": 3,
+     "social": 2,
+     "playful": 1
+    }
+   },
+   {
+    "t": "人迹罕至的极地或沙漠，探索未知",
+    "s": {
+     "mysterious": 2,
+     "independent": 2,
+     "mature": 1
+    }
+   },
+   {
+    "t": "和朋友们一起去热闹的主题乐园",
+    "s": {
+     "social": 3,
+     "playful": 2,
+     "energetic": 1
+    }
+   }
+  ]
+ },
+ {
+  "q": "你认为自己的最大魅力在于？",
+  "emoji": "✨",
+  "o": [
+   {
+    "t": "温暖治愈的笑容和包容力",
+    "s": {
+     "gentle": 3,
+     "emotional": 2,
+     "social": 1
+    }
+   },
+   {
+    "t": "独特神秘的气质和深邃的眼神",
+    "s": {
+     "mysterious": 2,
+     "elegant": 2,
+     "independent": 1
+    }
+   },
+   {
+    "t": "永不服输的冲劲和行动力",
+    "s": {
+     "proactive": 3,
+     "energetic": 2,
+     "playful": 1
+    }
+   },
+   {
+    "t": "什么场合都能聊得来的社交力",
+    "s": {
+     "social": 3,
+     "playful": 2,
+     "mature": 1
+    }
+   }
+  ]
+ },
+ {
+  "q": "你最讨厌别人对你做什么？",
+  "emoji": "😤",
+  "o": [
+   {
+    "t": "无视你的付出和感受",
+    "s": {
+     "loyal": 3,
+     "gentle": 2,
+     "emotional": 1
+    }
+   },
+   {
+    "t": "限制你的自由和选择",
+    "s": {
+     "independent": 3,
+     "proactive": 2,
+     "energetic": 1
+    }
+   },
+   {
+    "t": "对你撒谎和不信任你",
+    "s": {
+     "mature": 3,
+     "mysterious": 2,
+     "tsundere": 1
+    }
+   },
+   {
+    "t": "在众人面前让你难堪",
+    "s": {
+     "tsundere": 3,
+     "elegant": 2,
+     "social": 1
+    }
+   }
+  ]
+ },
+ {
+  "q": "深夜睡不着时，你通常会？",
+  "emoji": "🌙",
+  "o": [
+   {
+    "t": "回忆过去，想很多有的没的",
+    "s": {
+     "emotional": 3,
+     "mysterious": 2,
+     "gentle": 1
+    }
+   },
+   {
+    "t": "刷手机看视频打发时间",
+    "s": {
+     "social": 2,
+     "playful": 2,
+     "energetic": 1
+    }
+   },
+   {
+    "t": "思考人生，规划未来",
+    "s": {
+     "mature": 3,
+     "independent": 2,
+     "elegant": 1
+    }
+   },
+   {
+    "t": "起来做点事情，不想浪费时间",
+    "s": {
+     "proactive": 3,
+     "energetic": 2,
+     "independent": 1
+    }
+   }
+  ]
+ },
+ {
+  "q": "你觉得理想的爱情是什么样的？",
+  "emoji": "💍",
+  "o": [
+   {
+    "t": "细水长流，相濡以沫，白头偕老",
+    "s": {
+     "gentle": 3,
+     "loyal": 2,
+     "mature": 1
+    }
+   },
+   {
+    "t": "轰轰烈烈，刻骨铭心，至死不渝",
+    "s": {
+     "emotional": 3,
+     "proactive": 2,
+     "energetic": 1
+    }
+   },
+   {
+    "t": "心有灵犀，不言而喻的灵魂伴侣",
+    "s": {
+     "mysterious": 3,
+     "elegant": 2,
+     "emotional": 1
+    }
+   },
+   {
+    "t": "互相成就，共同成长，并肩前行",
+    "s": {
+     "independent": 3,
+     "mature": 2,
+     "proactive": 1
+    }
+   }
+  ]
+ },
+ {
+  "q": "你更欣赏哪种类型的角色？",
+  "emoji": "⭐",
+  "o": [
+   {
+    "t": "温柔善良，永远为他人着想",
+    "s": {
+     "gentle": 3,
+     "loyal": 2,
+     "emotional": 1
+    }
+   },
+   {
+    "t": "酷酷的，带着神秘感和距离感",
+    "s": {
+     "mysterious": 2,
+     "tsundere": 2,
+     "elegant": 1
+    }
+   },
+   {
+    "t": "开朗活泼，元气满满，充满正能量",
+    "s": {
+     "energetic": 3,
+     "social": 2,
+     "playful": 1
+    }
+   },
+   {
+    "t": "冷静理智，实力强大，一击必杀",
+    "s": {
+     "mature": 3,
+     "independent": 2,
+     "mysterious": 1
+    }
+   }
+  ]
+ },
+ {
+  "q": "当你在人群中时，你通常？",
+  "emoji": "👥",
+  "o": [
+   {
+    "t": "主动和周围人聊天，很快就打成一片",
+    "s": {
+     "social": 3,
+     "proactive": 2,
+     "energetic": 1
+    }
+   },
+   {
+    "t": "安静待在角落观察，不主动搭话",
+    "s": {
+     "mysterious": 2,
+     "independent": 2,
+     "mature": 1
+    }
+   },
+   {
+    "t": "找熟人聊天，不主动和陌生人交流",
+    "s": {
+     "tsundere": 2,
+     "gentle": 2,
+     "emotional": 1
+    }
+   },
+   {
+    "t": "成为话题中心，活跃气氛",
+    "s": {
+     "playful": 3,
+     "social": 2,
+     "proactive": 1
+    }
+   }
+  ]
+ },
+ {
+  "q": "你最怕失去什么？",
+  "emoji": "💔",
+  "o": [
+   {
+    "t": "重要的人的信任和依赖",
+    "s": {
+     "loyal": 3,
+     "gentle": 2,
+     "emotional": 1
+    }
+   },
+   {
+    "t": "自由选择的权利",
+    "s": {
+     "independent": 3,
+     "proactive": 2,
+     "energetic": 1
+    }
+   },
+   {
+    "t": "内心深处的秘密",
+    "s": {
+     "mysterious": 3,
+     "tsundere": 2,
+     "independent": 1
+    }
+   },
+   {
+    "t": "和朋友们的关系",
+    "s": {
+     "social": 3,
+     "emotional": 2,
+     "playful": 1
+    }
+   }
+  ]
+ },
+ {
+  "q": "你认为什么最能打动你？",
+  "emoji": "💝",
+  "o": [
+   {
+    "t": "默默为你付出的小细节",
+    "s": {
+     "gentle": 3,
+     "emotional": 2,
+     "loyal": 1
+    }
+   },
+   {
+    "t": "出其不意的浪漫惊喜",
+    "s": {
+     "playful": 3,
+     "proactive": 2,
+     "energetic": 1
+    }
+   },
+   {
+    "t": "深层次的精神共鸣和默契",
+    "s": {
+     "mysterious": 2,
+     "elegant": 2,
+     "mature": 1
+    }
+   },
+   {
+    "t": "在关键时刻的坚定守护",
+    "s": {
+     "loyal": 3,
+     "mature": 2,
+     "tsundere": 1
+    }
+   }
+  ]
+ },
+ {
+  "q": "如果世界末日了，你最后想做什么？",
+  "emoji": "🌅",
+  "o": [
+   {
+    "t": "和最爱的人在一起度过最后的时光",
+    "s": {
+     "emotional": 3,
+     "loyal": 2,
+     "gentle": 1
+    }
+   },
+   {
+    "t": "做自己一直想做但没做的事",
+    "s": {
+     "proactive": 3,
+     "energetic": 2,
+     "playful": 1
+    }
+   },
+   {
+    "t": "安静地看最后的风景",
+    "s": {
+     "mysterious": 2,
+     "elegant": 2,
+     "independent": 1
+    }
+   },
+   {
+    "t": "和所有朋友开个末日派对",
+    "s": {
+     "social": 3,
+     "playful": 2,
+     "energetic": 1
+    }
+   }
+  ]
+ },
+ {
+  "q": "你对待承诺的态度是？",
+  "emoji": "📜",
+  "o": [
+   {
+    "t": "一旦承诺就会用生命去守护",
+    "s": {
+     "loyal": 3,
+     "mature": 2,
+     "gentle": 1
+    }
+   },
+   {
+    "t": "视情况而定，灵活处理",
+    "s": {
+     "playful": 2,
+     "independent": 2,
+     "proactive": 1
+    }
+   },
+   {
+    "t": "不轻易承诺，但说到做到",
+    "s": {
+     "mysterious": 2,
+     "mature": 3,
+     "tsundere": 1
+    }
+   },
+   {
+    "t": "承诺是一种浪漫的表达方式",
+    "s": {
+     "emotional": 3,
+     "gentle": 2,
+     "elegant": 1
+    }
+   }
+  ]
+ },
+ {
+  "q": "你的房间是什么风格？",
+  "emoji": "🛏️",
+  "o": [
+   {
+    "t": "温馨整洁，充满生活气息",
+    "s": {
+     "gentle": 3,
+     "emotional": 2,
+     "social": 1
+    }
+   },
+   {
+    "t": "简约冷色，干净利落",
+    "s": {
+     "mature": 3,
+     "mysterious": 2,
+     "independent": 1
+    }
+   },
+   {
+    "t": "色彩缤纷，充满个性和玩具",
+    "s": {
+     "playful": 3,
+     "energetic": 2,
+     "proactive": 1
+    }
+   },
+   {
+    "t": "书籍满架，文艺气息浓厚",
+    "s": {
+     "elegant": 3,
+     "mysterious": 2,
+     "mature": 1
+    }
+   }
+  ]
+ },
+ {
+  "q": "当你生气时，你的表现是？",
+  "emoji": "😠",
+  "o": [
+   {
+    "t": "沉默不语，独自消化情绪",
+    "s": {
+     "mysterious": 2,
+     "independent": 2,
+     "mature": 1
+    }
+   },
+   {
+    "t": "直接表达不满，当场解决",
+    "s": {
+     "proactive": 3,
+     "energetic": 2,
+     "social": 1
+    }
+   },
+   {
+    "t": "嘴上说没事，其实很在意",
+    "s": {
+     "tsundere": 3,
+     "emotional": 2,
+     "loyal": 1
+    }
+   },
+   {
+    "t": "用行动证明自己的态度",
+    "s": {
+     "independent": 3,
+     "mature": 2,
+     "elegant": 1
+    }
+   }
+  ]
+ },
+ {
+  "q": "你最向往哪种超自然体验？",
+  "emoji": "🌌",
+  "o": [
+   {
+    "t": "和精灵对话，感受自然之力",
+    "s": {
+     "mysterious": 2,
+     "emotional": 2,
+     "gentle": 1
+    }
+   },
+   {
+    "t": "穿越时空，改变历史走向",
+    "s": {
+     "proactive": 3,
+     "mysterious": 2,
+     "energetic": 1
+    }
+   },
+   {
+    "t": "进入梦境，探索潜意识深处",
+    "s": {
+     "mysterious": 2,
+     "elegant": 2,
+     "emotional": 1
+    }
+   },
+   {
+    "t": "获得读心能力，看透人心",
+    "s": {
+     "tsundere": 2,
+     "mysterious": 2,
+     "social": 1
+    }
+   }
+  ]
+ },
+ {
+  "q": "你觉得什么样的笑容最迷人？",
+  "emoji": "😊",
+  "o": [
+   {
+    "t": "温暖如阳光的微笑，让人安心",
+    "s": {
+     "gentle": 3,
+     "emotional": 2,
+     "social": 1
+    }
+   },
+   {
+    "t": "带着自信的爽朗大笑",
+    "s": {
+     "energetic": 3,
+     "proactive": 2,
+     "playful": 1
+    }
+   },
+   {
+    "t": "若隐若现的神秘微笑",
+    "s": {
+     "mysterious": 3,
+     "elegant": 2,
+     "mature": 1
+    }
+   },
+   {
+    "t": "害羞时偷笑的样子",
+    "s": {
+     "tsundere": 3,
+     "emotional": 2,
+     "gentle": 1
+    }
+   }
+  ]
+ },
+ {
+  "q": "你最想拥有的技能是？",
+  "emoji": "🎯",
+  "o": [
+   {
+    "t": "烹饪出治愈人心的美食",
+    "s": {
+     "gentle": 3,
+     "social": 2,
+     "emotional": 1
+    }
+   },
+   {
+    "t": "战斗能力，保护重要的人",
+    "s": {
+     "loyal": 3,
+     "proactive": 2,
+     "energetic": 1
+    }
+   },
+   {
+    "t": "洞察一切的分析能力",
+    "s": {
+     "mature": 3,
+     "mysterious": 2,
+     "independent": 1
+    }
+   },
+   {
+    "t": "让任何人都开心的社交术",
+    "s": {
+     "social": 3,
+     "playful": 2,
+     "proactive": 1
+    }
+   }
+  ]
+ },
+ {
+  "q": "你的手机里最多的APP是？",
+  "emoji": "📱",
+  "o": [
+   {
+    "t": "社交软件，随时和朋友保持联系",
+    "s": {
+     "social": 3,
+     "playful": 2,
+     "energetic": 1
+    }
+   },
+   {
+    "t": "阅读和学习类APP",
+    "s": {
+     "mature": 3,
+     "independent": 2,
+     "elegant": 1
+    }
+   },
+   {
+    "t": "游戏和娱乐类APP",
+    "s": {
+     "playful": 3,
+     "energetic": 2,
+     "proactive": 1
+    }
+   },
+   {
+    "t": "摄影和艺术类APP",
+    "s": {
+     "emotional": 3,
+     "mysterious": 2,
+     "elegant": 1
+    }
+   }
+  ]
+ },
+ {
+  "q": "你认为最强的力量是？",
+  "emoji": "💪",
+  "o": [
+   {
+    "t": "温柔，能融化一切坚冰",
+    "s": {
+     "gentle": 3,
+     "emotional": 2,
+     "loyal": 1
+    }
+   },
+   {
+    "t": "意志，永不放弃的决心",
+    "s": {
+     "loyal": 3,
+     "proactive": 2,
+     "mature": 1
+    }
+   },
+   {
+    "t": "智慧，运筹帷幄的头脑",
+    "s": {
+     "mature": 3,
+     "mysterious": 2,
+     "independent": 1
+    }
+   },
+   {
+    "t": "勇气，直面恐惧的力量",
+    "s": {
+     "proactive": 3,
+     "energetic": 2,
+     "playful": 1
+    }
+   }
+  ]
+ },
+ {
+  "q": "你更喜欢哪个季节？",
+  "emoji": "🍂",
+  "o": [
+   {
+    "t": "春天，万物生长，充满希望",
+    "s": {
+     "gentle": 3,
+     "emotional": 2,
+     "playful": 1
+    }
+   },
+   {
+    "t": "夏天，充满活力和热情",
+    "s": {
+     "energetic": 3,
+     "social": 2,
+     "proactive": 1
+    }
+   },
+   {
+    "t": "秋天，沉静优雅，令人回味",
+    "s": {
+     "elegant": 3,
+     "mature": 2,
+     "mysterious": 1
+    }
+   },
+   {
+    "t": "冬天，安静神秘，引人遐想",
+    "s": {
+     "mysterious": 2,
+     "independent": 2,
+     "tsundere": 1
+    }
+   }
+  ]
+ },
+ {
+  "q": "你的口头禅类型是？",
+  "emoji": "💬",
+  "o": [
+   {
+    "t": "鼓励和温暖的话语",
+    "s": {
+     "gentle": 3,
+     "emotional": 2,
+     "social": 1
+    }
+   },
+   {
+    "t": "毒舌和吐槽，一针见血",
+    "s": {
+     "tsundere": 3,
+     "playful": 2,
+     "social": 1
+    }
+   },
+   {
+    "t": "冷静的分析和判断",
+    "s": {
+     "mature": 3,
+     "independent": 2,
+     "mysterious": 1
+    }
+   },
+   {
+    "t": "神秘又意味深长的话",
+    "s": {
+     "mysterious": 2,
+     "elegant": 2,
+     "emotional": 1
+    }
+   }
+  ]
+ },
+ {
+  "q": "你的理想职业是？",
+  "emoji": "🎓",
+  "o": [
+   {
+    "t": "教师或心理咨询师，帮助他人成长",
+    "s": {
+     "gentle": 3,
+     "emotional": 2,
+     "social": 1
+    }
+   },
+   {
+    "t": "探险家或运动员，挑战极限",
+    "s": {
+     "energetic": 3,
+     "proactive": 2,
+     "playful": 1
+    }
+   },
+   {
+    "t": "科学家或研究员，探索未知",
+    "s": {
+     "mysterious": 2,
+     "independent": 2,
+     "mature": 1
+    }
+   },
+   {
+    "t": "艺术家或设计师，创造美",
+    "s": {
+     "elegant": 3,
+     "emotional": 2,
+     "mysterious": 1
+    }
+   }
+  ]
+ },
+ {
+  "q": "最后，你希望你的另一半具备什么品质？",
+  "emoji": "💖",
+  "o": [
+   {
+    "t": "温柔体贴，永远在你身边",
+    "s": {
+     "gentle": 3,
+     "loyal": 2,
+     "emotional": 1
+    }
+   },
+   {
+    "t": "有趣好玩，每天都不一样",
+    "s": {
+     "playful": 3,
+     "energetic": 2,
+     "proactive": 1
+    }
+   },
+   {
+    "t": "成熟稳重，可以依靠",
+    "s": {
+     "mature": 3,
+     "independent": 2,
+     "elegant": 1
+    }
+   },
+   {
+    "t": "神秘迷人，永远猜不透",
+    "s": {
+     "mysterious": 3,
+     "tsundere": 2,
+     "elegant": 1
+    }
+   }
+  ]
+ }
+]

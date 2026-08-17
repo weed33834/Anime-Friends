@@ -1,35 +1,4 @@
-# System files
+node_modules
+dist
 .DS_Store
-Thumbs.db
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-
-# OS
-*.log
-*.tmp
-
-# Dependencies (if any added later)
-node_modules/
-
-# Build output (if any added later)
-dist/
-build/
-
-# Python
-__pycache__/
-*.pyc
-*.pyo
-
-# Testing
-*.test.js
-*.spec.js
-coverage/
-
-# Temp files
-*.bak
-*.orig
+*.local
