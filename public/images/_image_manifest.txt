@@ -42,7 +42,6 @@ images/madoka.jpg
 images/homura.jpg
 images/kanade.jpg
 images/yurippe.jpg
-images/tohka.jpg
 images/kurumi.jpg
 images/kotori.jpg
 images/miku.jpg

@@ -3,9 +3,11 @@
   --bg-deep: #0b1020;
   --bg-card: rgba(255, 255, 255, 0.06);
   --bg-card-hover: rgba(255, 255, 255, 0.10);
+  --bg-2: rgba(255, 255, 255, 0.08);
   --border: rgba(255, 255, 255, 0.12);
   --text-main: #f2f4ff;
   --text-dim: rgba(242, 244, 255, 0.62);
+  --text-muted: rgba(242, 244, 255, 0.45);
   --primary: #7c5cff;
   --primary-2: #ff6ec7;
   --grad: linear-gradient(135deg, #7c5cff 0%, #ff6ec7 100%);

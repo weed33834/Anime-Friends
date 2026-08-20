@@ -81,8 +81,8 @@ const router = useRouter()
 const store = useQuizStore()
 const go = (p) => router.push(p)
 
-// 未完成测试直接访问结果页时，重定向回测试页
-if (!store.finished) {
+// 未完成测试直接访问结果页时，先尝试从本地存储恢复；恢复失败才重开
+if (!store.finished && !store.restore()) {
   store.start()
   router.replace('/quiz')
 }

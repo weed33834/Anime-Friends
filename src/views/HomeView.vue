@@ -9,6 +9,7 @@
       </p>
       <div class="home-buttons">
         <button class="btn btn-primary" @click="goQuiz">开始测试</button>
+        <button class="btn btn-ghost" @click="go('/challenge')">挑战模式</button>
         <button class="btn btn-ghost" @click="go('/gallery')">角色图鉴</button>
       </div>
       <div class="home-stats">
