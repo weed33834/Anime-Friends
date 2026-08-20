@@ -62,3 +62,31 @@
 - **图片与角色身份一一对应**；唯一错位的 `chino.jpg` 已替换为正确图片。
 - **描述、名称、图片三者一致**；文本错误已修正。
 
+## 七大系列扩充与 133 角色重建（2026-08-20 续）
+
+### 背景与决策
+- 用户指令 C：引入更多 **Fate / 新世纪福音战士(EVA) / Re:从零开始的异世界生活(ReZero) / 命运石之门 / 辉夜大小姐想让我告白 / 我的青春恋爱物语果然有问题(春物) / 青春猪头少年不会梦到兔女郎学姐** 七大系列的真实角色，以官网/维基真实名单为准，缺的加、错的改、重复去重。
+- 经确认的三点决策：
+  1. "青春多多少年不为莫当退远去了" = 《青春猪头少年不会梦到兔女郎学姐》。
+  2. 范围：前 5 个 Fate（saber/rin/sakura/illya/medusa）保留，其余全部重做。
+  3. 方式：新增+替换由助手定。
+
+### 结果
+- 角色数 **87 → 133**。装配逻辑：`final = 保留 22 + 新增 47 + 其他 64`。
+- 7 大系列计数：**Fate 13 / EVA 7 / ReZero 16 / 命运石之门 8 / 辉夜 7 / 春物 11 / 青春猪头 7**。
+- 新增 47 个均含完整 12 维 traits、cv、birthday、catchphrase、color、favor_quote。
+- 图源：萌娘百科 `storage.moegirl.org.cn/moegirl/commons/...` 真实角色图；`is_bad()` 排除 logo/nerv/Uuu.jpg/OP_/ED_/PV_/1600/EVA-TV/EP 等。
+
+### 取舍决策
+- **kaji（加持良治，EVA）放弃**：萌娘 `zh.moegirl.org.cn` 与 `zh.moegirl.tw` 均无独立角色页（HTTP 404/超时），Fandom `evangelion.fandom.com/wiki/Kaji_Ryoji` 连接超时（`WinError 10060`）失败。按"宁缺毋滥"原则不强行塞入无图源角色；EVA 保留 7 名核心（rei/asuka/misato/shinji/kaworu/ritsuko/gendo）。
+- 补抓 4 张缺失图成功：puck←帕克(Re-从零开始的异世界生活).jpg、petra←Petra21.png、faris←B0055271_516a38c2b10f6.jpg、nodoka_b←Nodoka_Toyohama.jpg。
+
+### 收尾动作
+- `npm run build` 干净通过；commit `c4ac258`；三平台（GitHub/GitCode/Gitee）`git push origin main` 全成功。
+- CloudStudio 重新部署 `dist/`（纯静态），shareLink 已 verified：`https://7381928abfa44e18b6b70f43954410be.app.workbuddy.link`。
+- 去除硬编码：`HomeView.vue` 与 `package.json` 的"88位"改为动态 `{{ characters.length }}` / "133位"。
+- 新审计表 `audit_table.html` 重生成 **133 行**，133/133 线上图片 URL 经 curl 全量校验均返回 **200**，待用户逐张复核（编号 X / 链接 Y 报错的反馈机制不变）。
+
+### 待办
+- 用户逐张复核 `audit_table.html`；反馈「编号 X / 链接 Y 错了」后，改图或重映射。
+
