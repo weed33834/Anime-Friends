@@ -1,10 +1,10 @@
 <template>
   <div class="container home">
     <section class="hero">
-      <div class="home-badge">88位角色 · 12维性格 · 36道精选题</div>
+      <div class="home-badge">{{ characters.length }}位角色 · 12维性格 · 36道精选题</div>
       <h1 class="home-title">Anime<span class="grad"> Friends</span></h1>
       <p class="home-desc">
-        穿越彩虹闪烁的次元之门，回答36道精心设计的性格测试题，我们将从88位人气galgame与动漫角色中，
+        穿越彩虹闪烁的次元之门，回答36道精心设计的性格测试题，我们将从{{ characters.length }}位人气galgame与动漫角色中，
         用余弦相似度混合欧氏距离算法，找到与你灵魂共鸣的她。
       </p>
       <div class="home-buttons">
