@@ -9,13 +9,20 @@ AIGC:
     ReservedCode2: 8tf5ar1FzZewGG+q9kMyXk4j8ZkQochAHleAsXyakiJmK+/aQDKH+qKGYlzctijUWk1v0F7rO69NA++WFBXBbsGhqxJ4FBR8Kkt90nESGlthmdUq6N6lM7JOIKYB0j6i+elj4doxx8FXmPCJc8V9Iw4Sdfv7oXENzJIMOdGNRTucYVN+QRa1CYZtgp4=
 ---
 
-# Anime Friends — 88位角色12维性格匹配测试
+# Anime Friends — 133位角色12维性格匹配测试
 
 基于 GitHub 仓库 [weed33834/Anime-Friends](https://github.com/weed33834/Anime-Friends) 的重构版本：单文件 HTML → Vue3 + Vite 组件化工程，并修复了原版算法缺陷。
 
+## 在线体验
+
+- **国内快速通道（CloudStudio 托管）**：https://7381928abfa44e18b6b70f43954410be.app.workbuddy.link
+- GitHub Pages：https://weed33834.github.io/Anime-Friends/
+
+> 国内网络访问 GitHub Pages 不稳定时，请优先使用上方 CloudStudio 链接（国内可直连）。
+
 ## 功能
 
-- 88 位人气 galgame 与动漫角色，12 个性格维度
+- 133 位人气 galgame 与动漫角色，12 个性格维度（Fate / EVA / Re:Zero / 命运石之门 / 辉夜大小姐 / 春物 / 青春猪头少年 七大系列扩充）
 - 36 道测评题目，作答后计算与每位角色的性格契合度
 - 结果页展示 Top 角色、雷达图、契合度等级标签
 - 图鉴页（Gallery）、排行榜（Ranking）、统计页（Stats）、对比页（Compare）
@@ -49,7 +56,7 @@ src/
 ├── App.vue
 ├── main.js
 └── router.js
-public/images/      # 88 张角色图
+public/images/      # 133 张角色图
 ```
 
 ## 开发
@@ -64,6 +71,13 @@ npm run preview  # 预览构建产物
 ## 部署
 
 构建产物位于 `dist/`，可直接部署到任意静态托管（GitHub Pages / Nginx / CDN 等）。
+
+当前部署情况：
+
+| 通道 | 地址 | 说明 |
+| --- | --- | --- |
+| CloudStudio（国内直连） | https://7381928abfa44e18b6b70f43954410be.app.workbuddy.link | 主力线上通道，内容与仓库同步更新 |
+| GitHub Pages | https://weed33834.github.io/Anime-Friends/ | 由 `.github/workflows/static.yml` 自动构建部署（push main 触发） |
 
 ## 角色数据来源
 
