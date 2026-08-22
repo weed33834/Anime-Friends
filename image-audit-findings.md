@@ -117,3 +117,23 @@
 - `public/images/` 现有 **132 张图，与 characters.json 一一精确对应**（文件名 = id，零缺失零孤儿）。
 - 全库 MD5 无重复图片。
 
+## 第三轮：网络检索交叉验证（2026-08-23）
+
+### 方法
+按"以官方资料反查角色数据"的流程，对全部被修改过的条目逐一搜索权威数据库（Key 公式站、ACDB、NeoApo、EvaWiki Fandom、SRW Wiki 等），核对 CV 与生日。
+
+### 核验结果
+
+| 条目 | 字段 | 权威来源数据 | 结论 |
+|---|---|---|---|
+| makoto（泽渡真琴） | CV | NeoApo：飯塚雅弓 | ❌原"小林沙苗"实为美坂栞的 CV（shiori/makoto 条目生成时互相污染）→ **已修正** |
+| makoto（泽渡真琴） | 生日 | Key 公式站：1月6日 | ❌原"10月13日"→ **已修正** |
+| amnist（泉戸ましろ/Tayutama） | 身份与外观 | ACDB：very long brown hair, purple eyes, animal ears；白衣神明形象 | ✅图片与修正后文本一致；原"银发红瞳"确认有误 |
+| misato（葛城美里） | CV＋生日 | Wikipedia/NeoApo/Fandom/SRW Wiki：三石琴乃；1986年12月8日 | ✅无误（与声优同生日为官方彩蛋） |
+| ayu／nayuki | 生日 | Key 公式站：1月7日／12月23日 | ✅无误 |
+| asuna | 图为创世神ステイシア形态（金发金瞳白甲细剑） | SAO WoU 官方设定及手办商品页 | ✅与 appearance 文本吻合 |
+
+### 结论
+- 本轮新增修复 makoto 的 CV 与生日共 2 处资料错误。
+- 其余约 120 个条目的 CV/生日尚未逐条核验，建议后续按系列批量比对官方维基（每系列一次检索）。
+
