@@ -90,3 +90,30 @@
 ### 待办
 - 用户逐张复核 `audit_table.html`；反馈「编号 X / 链接 Y 错了」后，改图或重映射。
 
+## 第二轮图文一致性审计（2026-08-23）
+
+### 方法
+- 程序化核查：字段完整性、traits 维度/取值、id/name 查重、发色瞳色 appearance↔description 交叉比对、全量图片 MD5 查重。
+- 视觉抽查：对历史问题角色及可疑条目逐张人工核对（chino/shana/medusa/makoto/asuna/sora/chizuru/rise/amnist/saber/rem_alt/shiori）。
+
+### 发现并修复
+
+| id | 问题 | 处理 |
+|---|---|---|
+| makoto / asuna | **两张图互换**：makoto.jpg 实为亚丝娜（甲裙细剑），asuna.jpg 实为真琴风格便服少女 | 两文件名互换，JSON 无需改动 |
+| shiori | shiori.jpg 实为**西宫硝子官方设定图（Model Sheet）**，与"美坂栞"完全不符；且数据集已有正确硝子条目（shouko） | 删除该条目；以已视觉核实的葛城美里替补 |
+| misato | 原条目指向 misato.png 未核实；misato.jpg 曾被误判孤儿 | 统一为已核实的 misato.jpg（紫长发/棕眼/金耳环/十字架项链），appearance 同步修正"短发→长发" |
+| shana | description 写"红发少女"，appearance 写黑发（战斗时变红）；图为红发战斗形态 | description 统一为"平时黑发红瞳、战斗时化作红发烈焰" |
+| medusa | 图中紫瞳可见、无眼罩，appearance 却写"戴眼罩" | 移除眼罩描述，按图补齐细节 |
+| sora | 图为白衬衫+格纹裙+黑缎带双马尾+兔子玩偶，非"黑色洋装/哥特萝莉" | appearance 改为与图一致 |
+| amnist | 图为浅棕长发+狐耳+紫瞳+白衣和服持神杖，原写"银发红瞳" | 按图修正 |
+
+### 清理
+- 删除孤儿文件：kaworu.png、mio_i.png、miura.jpg、miyuki.png、nodoka_k.jpg、rem_alt.jpg（rem_alt 实为无关的金发校服少女）、shiori.jpg、misato.png、_image_manifest.txt。
+- 删除仓库根目录审计中间产物 `audit_table.html`。
+
+### 结果
+- 角色数 **133 → 132**（移除无法配图的错误条目），`index.html` / `package.json` / README 计数同步更新。
+- `public/images/` 现有 **132 张图，与 characters.json 一一精确对应**（文件名 = id，零缺失零孤儿）。
+- 全库 MD5 无重复图片。
+

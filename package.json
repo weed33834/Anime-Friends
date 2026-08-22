@@ -1,21 +1,23 @@
 {
   "name": "anime-friends-vue",
   "version": "2.0.0",
-  "description": "Anime Friends - 133位人气galgame与动漫角色12维性格匹配测试（Vue3 + Vite 组件化重构版）",
+  "description": "Anime Friends - 132位人气galgame与动漫角色12维性格匹配测试（Vue3 + Vite 组件化重构版）",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest run"
   },
   "dependencies": {
+    "pinia": "^2.1.7",
     "vue": "^3.4.21",
-    "vue-router": "^4.3.0",
-    "pinia": "^2.1.7"
+    "vue-router": "^4.3.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.4",
-    "vite": "^5.2.0"
+    "vite": "^5.2.0",
+    "vitest": "^1.6.1"
   }
 }

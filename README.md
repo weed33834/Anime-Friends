@@ -9,9 +9,9 @@ AIGC:
     ReservedCode2: 8tf5ar1FzZewGG+q9kMyXk4j8ZkQochAHleAsXyakiJmK+/aQDKH+qKGYlzctijUWk1v0F7rO69NA++WFBXBbsGhqxJ4FBR8Kkt90nESGlthmdUq6N6lM7JOIKYB0j6i+elj4doxx8FXmPCJc8V9Iw4Sdfv7oXENzJIMOdGNRTucYVN+QRa1CYZtgp4=
 ---
 
-# Anime Friends — 133位角色12维性格匹配测试
+# Anime Friends — 132位角色12维性格匹配测试
 
-基于 GitHub 仓库 [weed33834/Anime-Friends](https://github.com/weed33834/Anime-Friends) 的重构版本：单文件 HTML → Vue3 + Vite 组件化工程，并修复了原版算法缺陷。
+本仓库 v1 为单文件 HTML 版，后原地重构为 Vue3 + Vite 组件化工程（即当前 `src/`），并修复了初版算法缺陷。数据与图片的历次审计记录见 [image-audit-findings.md](image-audit-findings.md)。
 
 ## 在线体验
 
@@ -22,10 +22,11 @@ AIGC:
 
 ## 功能
 
-- 133 位人气 galgame 与动漫角色，12 个性格维度（Fate / EVA / Re:Zero / 命运石之门 / 辉夜大小姐 / 春物 / 青春猪头少年 七大系列扩充）
+- 132 位人气 galgame 与动漫角色，12 个性格维度（Fate / EVA / Re:Zero / 命运石之门 / 辉夜大小姐 / 春物 / 青春猪头少年 七大系列扩充）
 - 36 道测评题目，作答后计算与每位角色的性格契合度
 - 结果页展示 Top 角色、雷达图、契合度等级标签
 - 图鉴页（Gallery）、排行榜（Ranking）、统计页（Stats）、对比页（Compare）
+- 挑战模式（Challenge）：限时答题挑战，见 `src/views/ChallengeView.vue`
 - 全维度概率显示与匹配算法
 
 ## 与原版相比的修复
@@ -56,8 +57,20 @@ src/
 ├── App.vue
 ├── main.js
 └── router.js
-public/images/      # 133 张角色图
+public/images/      # 132 张角色图（与 characters.json 一一对应，文件名 = 角色 id）
 ```
+
+## 测试
+
+```bash
+npm test         # vitest 单测：匹配算法 / 分享编码 / 数据完整性
+```
+
+数据完整性约束（由测试锁定）：`characters.json` 每条的 `image` 必须精确对应 `public/images/` 下的真实文件；`traits` 必须为 12 维且取值 0–100；`id` 与 `name` 不得重复。
+
+## 版权声明
+
+本项目为非商业粉丝作品（仅供学习交流）。角色名称、设定与图片版权归原作者及版权方所有；图片来源为公开网络渠道的粉丝社区素材。如有侵权请通过 [Issues](https://github.com/weed33834/Anime-Friends/issues) 联系，核实后将立即删除相关内容。
 
 ## 开发
 

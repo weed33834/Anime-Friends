@@ -1,0 +1,27 @@
+name: Sync Mirrors
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+concurrency:
+  group: mirror-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout (full history)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Push to Gitee
+        run: |
+          git push "https://${{ secrets.GITEE_USERNAME }}:${{ secrets.GITEE_TOKEN }}@gitee.com/badhope/Anime-Friends.git" "HEAD:refs/heads/main" --force-with-lease=refs/heads/main
+
+      - name: Push to GitCode
+        run: |
+          git push "https://oauth2:${{ secrets.GITCODE_TOKEN }}@gitcode.com/badhope/Anime-Friends.git" "HEAD:refs/heads/main"

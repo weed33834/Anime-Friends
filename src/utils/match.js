@@ -90,7 +90,7 @@ export function matchScore(u, c) {
   const cs = cosSim(uv, cv)
   const ed = eucDist(uv, cv)
   const ne = Math.max(0, Math.min(1, 1 - ed / (Math.sqrt(dimensions.length) * 6)))
-  return Math.round((0.6 * cs + 0.4 * ne) * 100)
+  return Math.round(Math.max(0, Math.min(1, 0.6 * cs + 0.4 * ne)) * 100)
 }
 
 // 契合度等级：由组件 MatchLevelBadge 独立实现（避免重复维护）
